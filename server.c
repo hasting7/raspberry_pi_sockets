@@ -17,7 +17,7 @@ void displayDigit(int);
 int main() {
 	wiringPiSetup();
 	setupSegPins();
-	displayDigit(0);
+	displayValue(0);
 
 
 	struct sockaddr_in dest; // info about machine connecting to server
@@ -48,7 +48,7 @@ int main() {
 		char buff[16] = "hello world";
 		send(*sock, buff, 16, 0);
 
-		displayDigit(1);
+		displayValue(1);
 
 		close(*sock);
 
