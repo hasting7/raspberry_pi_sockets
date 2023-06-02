@@ -36,6 +36,8 @@ int main() {
 	bind(mysocket, (struct sockaddr *)&serv, sizeof(struct sockaddr)); // bind serv information to mysocket
 
 	// start listening and allow a queue of 'n' connections
+	
+	int connections = 0;
 
 	for(;;) {
 		listen(mysocket, 1);
@@ -43,12 +45,13 @@ int main() {
 		int *sock = malloc(sizeof(int *));
 		memcpy(sock, &consocket, sizeof(int));
 
-		printf("connected to client\ngonna send a message to client\n");
+		// establish connetion
+
 
 		char buff[16] = "hello world";
 		send(*sock, buff, 16, 0);
 
-		displayValue(1);
+		displayValue(++connections);
 
 		close(*sock);
 
