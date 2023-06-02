@@ -1,3 +1,3 @@
 build:
 	git pull origin main
-	gcc -Wall -Werror -std=c17 toggle.c server.c -o server -lwiringPi
+	gcc -Wall -Werror -std=c17 seven_seg.c server.c -o server -lwiringPi
