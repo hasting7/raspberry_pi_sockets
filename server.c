@@ -6,10 +6,22 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <wiringPi.h>
+
+#include "server.h"
 
 #define PORT 5566
 
+void setup();
+void toggle(int ,int); 
+
+
 int main() {
+	setup();
+
+	toggle(RED, LOW); 
+	toggle(BLUE, HIGH);
+
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
 	int mysocket;
@@ -37,7 +49,8 @@ int main() {
 
 		char buff[16] = "hello world";
 		send(*sock, buff, 16, 0);
-	
+
+		toggle(RED, HIGH);
 
 		close(*sock);
 
