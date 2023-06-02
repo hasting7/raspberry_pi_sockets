@@ -9,7 +9,7 @@
 #define D 2
 #define E 3
 #define F 14
-#define G 9
+#define G 13
 int seg_pins[] = { A, B, C, D, E, F, G };
 
 unsigned char values[] = {
