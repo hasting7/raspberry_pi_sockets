@@ -12,7 +12,7 @@
 #define PORT 5566
 
 void setupSegPins();
-void displayDigit(int);
+void displayValue(int);
 
 int main() {
 	wiringPiSetup();
