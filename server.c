@@ -8,19 +8,17 @@
 #include <sys/socket.h>
 #include <wiringPi.h>
 
-#include "server.h"
 
 #define PORT 5566
 
-void setup();
-void toggle(int ,int); 
-
+void setupSegPins();
+void displayDigit(int);
 
 int main() {
-	setup();
+	wiringPiSetup();
+	setupSegPins();
+	displayDigit(0);
 
-	toggle(RED, LOW); 
-	toggle(BLUE, HIGH);
 
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
@@ -50,7 +48,7 @@ int main() {
 		char buff[16] = "hello world";
 		send(*sock, buff, 16, 0);
 
-		toggle(RED, HIGH);
+		displayDigit(1);
 
 		close(*sock);
 
