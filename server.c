@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <wiringPi.h>
+#include <pthread.h>
 
 
 #define PORT 5566
@@ -14,6 +15,11 @@
 
 void setupSegPins();
 void displayValue(int);
+
+void thread_func(void *data) {
+	printf("thread created\n");
+	return NULL
+}
 
 int main() {
 	wiringPiSetup();
@@ -24,6 +30,7 @@ int main() {
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
 	int mysocket;
+	pthread thread; 
 	char message[MAX_LEN] = { 0 };
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
@@ -51,21 +58,13 @@ int main() {
 		displayValue(++connections);
 		
 		//server waits on client
+
+		int *socket = malloc(sizeof(int *));
+
+		memcpy(socket, &consocket, sizeof(int));
+	
+		pthread_create(&thread, NULL, thread_func, (void *) socket);
 		
-		for (;;) {
-			recv(*sock, message, MAX_LEN, 0);
-			if (message[0] == '\0') break;
-
-			printf("message from client: %s\n", message);
-	
-			memset(message, 0, MAX_LEN);
-	
-			strncpy(message, "heard that", MAX_LEN);
-
-			send(*sock, message, MAX_LEN, 0);
-		}
-
-		printf("disconnecting from current client\n");
 
 		close(*sock);
 
