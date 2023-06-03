@@ -16,7 +16,7 @@
 void setupSegPins();
 void displayValue(int);
 
-void thread_func(void *data) {
+void *thread_func(void *data) {
 	printf("thread created\n");
 	return NULL;
 }
