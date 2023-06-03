@@ -10,9 +10,9 @@
 #define PORT 5566
 #define MAX_LEN 256
 
-void get_input(char **buffer) {
+void get_input(char *buffer) {
 	memset(buffer, 0, MAX_LEN);
-	fscanf(stdin, "%255[^\n]", *buffer);
+	fscanf(stdin, "%255[^\n]", buffer);
 	fflush(stdin);
 }
 
@@ -36,7 +36,7 @@ int main() {
 
 	for (;;) {
 		printf("type: ");
-		get_input(&message);
+		get_input(message);
 
 		printf("sending %s to server\n", message);
 
