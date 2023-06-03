@@ -32,8 +32,6 @@ void reset_button();
 void *thread_func(void *data) {
 	printf("thread created\n");
 
-	wiringPiSetup();
-	pinMode(21, OUTPUT);
 
 	digitalWrite(21, HIGH);
 
@@ -69,6 +67,9 @@ int main() {
 	wiringPiSetup();
 	setupSegPins();
 	displayValue(0);
+
+	pinMode(21, OUTPUT);
+	digitalWrite(21, LOW);
 
 
 	struct sockaddr_in dest; // info about machine connecting to server
