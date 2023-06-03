@@ -10,7 +10,7 @@
 
 
 #define PORT 5566
-#define MAX_LEN 15
+#define MAX_LEN 256
 
 void setupSegPins();
 void displayValue(int);
@@ -54,7 +54,7 @@ int main() {
 		
 		for (;;) {
 			recv(*sock, message, MAX_LEN, 0);
-			if (message[MAX_LEN] != '\0') break;
+			if (message[] != '\0') break;
 
 			printf("message from client: %s\n", message);
 	
@@ -64,6 +64,8 @@ int main() {
 
 			send(*sock, message, MAX_LEN, 0);
 		}
+
+		printf("disconnecting from current client\n");
 
 		close(*sock);
 
