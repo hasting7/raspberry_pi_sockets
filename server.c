@@ -31,6 +31,15 @@ void reset_button();
 
 void *thread_func(void *data) {
 	printf("thread created\n");
+
+	pinMode(21, OUTPUT);
+
+	for (;;) {
+		digitalWrite(21, HIGH);
+		delay(500);
+		digitalWrite(21, LOW);
+		delay(500);
+	}
 	return NULL;
 }
 
@@ -71,8 +80,8 @@ int main() {
 	//char message[MAX_LEN] = { 0 };
 
 
-	Button reset = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 0.1};
-	pthread_create(&thread, NULL, button_thread_func, (void *) &reset);
+	//Button reset = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 0.1};
+	//pthread_create(&thread, NULL, button_thread_func, (void *) &reset);
 
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
