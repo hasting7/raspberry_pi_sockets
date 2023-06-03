@@ -38,6 +38,8 @@ int main() {
 		printf("type: ");
 		get_input(message);
 
+		if (message[0] == '\0') continue;
+
 		printf("sending %s to server\n", message);
 
 		send(mysocket, message, MAX_LEN, 0);
