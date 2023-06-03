@@ -39,6 +39,8 @@ int main() {
 		memset(&message, 0, MAX_LEN);	
 
 		recv(mysocket, message, MAX_LEN, 0);
+	
+		printf("message from server: %s\n", message);
 
 		
 	}	
