@@ -31,8 +31,15 @@ void *thread_func(void *data) {
 
 void *button_thread_func(void *data) {
 	Button *btn = (Button *) data;
+	pinMode(btn->pin, INPUT);
 
 	printf("button on pin %d\n",btn->pin);
+
+	for (;;) {
+		if (digitalRead(btn->pin) == LOW) {
+			printf("button pressed\n");
+		}
+	}
 	
 	return NULL;
 }
