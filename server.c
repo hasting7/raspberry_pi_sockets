@@ -38,7 +38,7 @@ void *button_thread_func(void *data) {
 	printf("button on pin %d\n",btn->pin);
 
 	for (;;) {
-		if (digitalRead(btn->pin) == LOW) {
+		if (digitalRead(btn->pin) == HIGH) {
 			printf("button pressed\n");
 		}
 	}
