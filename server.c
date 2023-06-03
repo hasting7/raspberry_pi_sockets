@@ -10,7 +10,7 @@
 
 
 #define PORT 5566
-#define MAX_LEN 5
+#define MAX_LEN 15
 
 void setupSegPins();
 void displayValue(int);
