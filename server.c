@@ -41,9 +41,9 @@ void *button_thread_func(void *data) {
 	printf("button on pin %d\n",btn->pin);
 
 	for (;;) {
-		if ((digitalRead(btn->pin) == HIGH) && (btn->last_pressed + btn->pause < time(NULL))) {
+		if ((digitalRead(btn->pin) == HIGH) && (btn->last_press + btn->pause < time(NULL))) {
 			printf("button pressed\n");
-			btn->last_pressed = time(NULL);
+			btn->last_press = time(NULL);
 		}
 	}
 	
