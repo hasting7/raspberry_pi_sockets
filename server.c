@@ -42,7 +42,7 @@ void *button_thread_func(void *data) {
 
 	for (;;) {
 		if ((digitalRead(btn->pin) == HIGH) && (btn->last_press + btn->pause < time(NULL))) {
-			printf("button pressed\n");
+			btn->callback();
 			btn->last_press = time(NULL);
 		}
 	}
