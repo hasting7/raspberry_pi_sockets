@@ -13,12 +13,32 @@
 #define PORT 5566
 #define MAX_LEN 256
 
+typedef struct button_info_struct {
+	int pin;
+	void (*callback)();
+} Button;
+
 void setupSegPins();
 void displayValue(int);
+void *thread_func(void *);
+void *button_thread_func(void *);
+void reset_button();
 
 void *thread_func(void *data) {
 	printf("thread created\n");
 	return NULL;
+}
+
+void *button_thread_func(void *data) {
+	Button *btn = (Button *) data;
+
+	printf("button on pin %d\n",btn->pin);
+	
+	return NULL;
+}
+
+void reset_button() {
+	printf("reset\n");
 }
 
 int main() {
@@ -32,6 +52,11 @@ int main() {
 	int mysocket;
 	pthread_t thread; 
 	//char message[MAX_LEN] = { 0 };
+
+
+	Button reset = { .pin = 21, .callback = &reset_button };
+	pthread_create(&thread, NULL, button_thread_func, (void *) reset);
+
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
 
