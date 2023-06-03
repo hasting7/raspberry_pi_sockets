@@ -31,7 +31,9 @@ void *thread_func(void *data) {
 
 void *button_thread_func(void *data) {
 	Button *btn = (Button *) data;
+	wiringPiSetup();
 	pinMode(btn->pin, INPUT);
+	pullUpDnControl(btn->pin, PUD_UP);
 
 	printf("button on pin %d\n",btn->pin);
 
