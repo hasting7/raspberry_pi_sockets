@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <wiringPi.h>
 #include <pthread.h>
+#include <time.h>
 
 
 #define PORT 5566
@@ -16,6 +17,8 @@
 typedef struct button_info_struct {
 	int pin;
 	void (*callback)();
+	time_t last_press;
+	time_t pause;
 } Button;
 
 void setupSegPins();
@@ -38,8 +41,9 @@ void *button_thread_func(void *data) {
 	printf("button on pin %d\n",btn->pin);
 
 	for (;;) {
-		if (digitalRead(btn->pin) == HIGH) {
+		if ((digitalRead(btn->pin) == HIGH) && (btn->last_pressed + btn->pause < time(NULL))) {
 			printf("button pressed\n");
+			btn->last_pressed = time(NULL);
 		}
 	}
 	
@@ -63,7 +67,7 @@ int main() {
 	//char message[MAX_LEN] = { 0 };
 
 
-	Button reset = { .pin = 21, .callback = &reset_button };
+	Button reset = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 1};
 	pthread_create(&thread, NULL, button_thread_func, (void *) &reset);
 
 
