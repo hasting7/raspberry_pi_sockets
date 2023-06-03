@@ -31,7 +31,7 @@ int main() {
 	struct sockaddr_in serv; // info about server
 	int mysocket;
 	pthread_t thread; 
-	char message[MAX_LEN] = { 0 };
+	//char message[MAX_LEN] = { 0 };
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
 
