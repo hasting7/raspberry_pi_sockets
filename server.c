@@ -69,7 +69,7 @@ int main() {
 	displayValue(0);
 
 	pinMode(21, OUTPUT);
-	digitalWrite(21, LOW);
+	digitalWrite(21, HIGH);
 
 
 	struct sockaddr_in dest; // info about machine connecting to server
