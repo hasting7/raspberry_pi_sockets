@@ -8,10 +8,12 @@
 #include <sys/socket.h>
 
 #define PORT 5566
+#define MAX_LEN 256
 
 int main() {
 	int mysocket;
 	struct sockaddr_in dest;
+	char message[MAX_LEN] = { 0 };
 	
 	mysocket = socket(AF_INET, SOCK_STREAM, 0);
 	
@@ -24,10 +26,22 @@ int main() {
 
 	printf("connected to server\n");
 
-	char buff[16] = { 0 };
-	recv(mysocket, buff, 16, 0);
+	// established connection to server
+
+	for (;;) {
+		printf("type: ");
+		scanf("%255s", message);
+
+		printf("sending %s to server\n", message);
+
+		send(mysocket, message, MAX_LEN, 0);
 	
-	printf("message from server: %s\n",buff);
+		memset(&message, 0, MAX_LEN);	
+
+		recv(mysocket, message, MAX_LEN, 0);
+
+		
+	}	
 	
 	close(mysocket);	
 

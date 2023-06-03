@@ -10,6 +10,7 @@
 
 
 #define PORT 5566
+#define MAX_LEN 256
 
 void setupSegPins();
 void displayValue(int);
@@ -23,6 +24,7 @@ int main() {
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
 	int mysocket;
+	char message[MAX_LEN] = { 0 };
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
 
@@ -46,12 +48,20 @@ int main() {
 		memcpy(sock, &consocket, sizeof(int));
 
 		// establish connetion
-
-
-		char buff[16] = "hello world";
-		send(*sock, buff, 16, 0);
-
 		displayValue(++connections);
+		
+		//server waits on client
+		
+		for (;;) {
+			recv(*sock, message, MAX_LEN, 0);
+			printf("message from client: %s\n", message);
+	
+			memset(message, 0, MAX_LEN);
+	
+			message = "heard that\n";
+
+			send(*sock, message, MAX_LEN, 0);
+		}
 
 		close(*sock);
 
