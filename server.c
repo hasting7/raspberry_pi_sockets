@@ -55,7 +55,7 @@ int main() {
 
 
 	Button reset = { .pin = 21, .callback = &reset_button };
-	pthread_create(&thread, NULL, button_thread_func, (void *) reset);
+	pthread_create(&thread, NULL, button_thread_func, (void *) &reset);
 
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
