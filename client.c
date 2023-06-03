@@ -10,6 +10,12 @@
 #define PORT 5566
 #define MAX_LEN 256
 
+void get_input(char **buffer) {
+	memset(buffer, 0, MAX_LEN);
+	fscanf(stdin, "%255[^\n]", *buffer);
+	fflush(stdin);
+}
+
 int main() {
 	int mysocket;
 	struct sockaddr_in dest;
@@ -30,14 +36,12 @@ int main() {
 
 	for (;;) {
 		printf("type: ");
-		scanf("%255s", message);
+		get_input(&message);
 
 		printf("sending %s to server\n", message);
 
 		send(mysocket, message, MAX_LEN, 0);
 	
-		memset(&message, 0, MAX_LEN);	
-
 		recv(mysocket, message, MAX_LEN, 0);
 	
 		printf("message from server: %s\n", message);

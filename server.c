@@ -58,7 +58,7 @@ int main() {
 	
 			memset(message, 0, MAX_LEN);
 	
-			strncpy(message, "heard that\n", MAX_LEN);
+			strncpy(message, "heard that", MAX_LEN);
 
 			send(*sock, message, MAX_LEN, 0);
 		}
