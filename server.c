@@ -18,7 +18,7 @@ void displayValue(int);
 
 void thread_func(void *data) {
 	printf("thread created\n");
-	return NULL
+	return NULL;
 }
 
 int main() {
@@ -30,7 +30,7 @@ int main() {
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
 	int mysocket;
-	pthread thread; 
+	pthread_t thread; 
 	char message[MAX_LEN] = { 0 };
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
@@ -63,7 +63,7 @@ int main() {
 
 		memcpy(socket, &consocket, sizeof(int));
 	
-		pthread_create(&thread, NULL, thread_func, (void *) socket);
+		pthread_create(&thread, NULL, thread_func, (void *) &socket);
 		
 
 		close(*sock);
