@@ -54,7 +54,7 @@ int main() {
 		
 		for (;;) {
 			recv(*sock, message, MAX_LEN, 0);
-			if (message[] != '\0') break;
+			if (message[0] != '\0') break;
 
 			printf("message from client: %s\n", message);
 	
