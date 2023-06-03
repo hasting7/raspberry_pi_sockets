@@ -14,6 +14,8 @@
 #define PORT 5566
 #define MAX_LEN 256
 
+volatile int connections = 0;
+
 typedef struct button_info_struct {
 	int pin;
 	void (*callback)();
@@ -52,6 +54,7 @@ void *button_thread_func(void *data) {
 
 void reset_button() {
 	printf("reset\n");
+	connections++;
 }
 
 int main() {
@@ -84,8 +87,6 @@ int main() {
 
 	// start listening and allow a queue of 'n' connections
 	
-	int connections = 0;
-
 	for(;;) {
 		listen(mysocket, 1);
 		int consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
