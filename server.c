@@ -32,6 +32,7 @@ void reset_button();
 void *thread_func(void *data) {
 	printf("thread created\n");
 
+	wiringPiSetup();
 	pinMode(21, OUTPUT);
 
 	for (;;) {
