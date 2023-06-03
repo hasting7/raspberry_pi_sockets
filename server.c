@@ -67,7 +67,7 @@ int main() {
 	//char message[MAX_LEN] = { 0 };
 
 
-	Button reset = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 1};
+	Button reset = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 0.1};
 	pthread_create(&thread, NULL, button_thread_func, (void *) &reset);
 
 
