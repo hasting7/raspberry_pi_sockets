@@ -33,7 +33,7 @@ void *thread_func(void *data) {
 	printf("thread created\n");
 
 
-	digitalWrite(21, HIGH);
+	//digitalWrite(21, HIGH);
 
 	
 	return NULL;
@@ -68,8 +68,8 @@ int main() {
 	setupSegPins();
 	displayValue(0);
 
-	pinMode(21, OUTPUT);
-	digitalWrite(21, HIGH);
+	pinMode(29, OUTPUT);
+	digitalWrite(29, HIGH);
 
 
 	struct sockaddr_in dest; // info about machine connecting to server
