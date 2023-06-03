@@ -32,7 +32,7 @@ void reset_button();
 void *thread_func(void *data) {
 	printf("thread created\n");
 
-	wiringPiSetup();
+	//wiringPiSetup();
 	pinMode(21, OUTPUT);
 
 	digitalWrite(21, HIGH);
