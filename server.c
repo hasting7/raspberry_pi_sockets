@@ -36,7 +36,7 @@ void *thread_func(void *data) {
 	int count = 0;
 	for (;;) {
 		count++;
-		pwmWrite(1, sin(count) * 1023.0 + 512);
+		pwmWrite(1, sin(count * 0.05) * 1023.0 + 512);
 		
 	}
 	return NULL;
