@@ -9,6 +9,7 @@
 #include <wiringPi.h>
 #include <pthread.h>
 #include <time.h>
+#include <math.h>
 
 
 #define PORT 5566
@@ -32,13 +33,11 @@ void reset_button();
 void *thread_func(void *data) {
 	printf("thread created\n");
 
-
+	int count = 0;
 	for (;;) {
-
-		digitalWrite(15, HIGH);
-		delay(500);
-		digitalWrite(15, LOW);
-		delay(500);
+		count++;
+		pwmWrite(15, sin(count) * 1023.0 + 512);
+		
 	}
 	return NULL;
 }
@@ -72,8 +71,8 @@ int main() {
 	setupSegPins();
 	displayValue(0);
 
-	pinMode(15, OUTPUT);
-	digitalWrite(15, LOW);
+	pinMode(15, PWM_OUTPUT);
+	digitalWrite(15, 0);
 
 
 	struct sockaddr_in dest; // info about machine connecting to server

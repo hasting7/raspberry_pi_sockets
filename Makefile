@@ -1,6 +1,6 @@
 build:
 	git pull origin main
-	gcc -Wall -Werror -std=c17 seven_seg.c server.c -o server -lwiringPi -lpthread
+	gcc -Wall -Werror -std=c17 seven_seg.c server.c -o server -lwiringPi -lpthread -lm
 
 
 client_side:
