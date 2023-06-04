@@ -72,7 +72,7 @@ int main() {
 	displayValue(0);
 
 	pinMode(1, PWM_OUTPUT);
-	digitalWrite(1, 0);
+	pwmWrite(1, 0);
 
 
 	struct sockaddr_in dest; // info about machine connecting to server
