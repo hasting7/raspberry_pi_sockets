@@ -34,7 +34,7 @@ int main() {
 
 	// established connection to server
 
-	for (;;) {
+	while (1 == 2) {
 		printf("type: ");
 		get_input(message);
 
