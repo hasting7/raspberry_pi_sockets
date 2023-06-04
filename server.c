@@ -36,8 +36,8 @@ void *thread_func(void *data) {
 	int count = 0;
 	for (;;) {
 		count++;
-		printf("%.2f\n",sin(count * 0.001) * 1023.0 + 215);
-		pwmWrite(1, sin(count * 0.001) * 1023.0 + 512);
+		printf("%.2f\n",sin(count * 0.001) * 512.0 + 1023);
+		pwmWrite(1, sin(count * 0.001) * 512.0 + 1023);
 		
 	}
 	return NULL;
