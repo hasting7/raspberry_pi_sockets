@@ -36,7 +36,7 @@ void *thread_func(void *data) {
 	int count = 0;
 	for (;;) {
 		count++;
-		pwmWrite(15, sin(count) * 1023.0 + 512);
+		pwmWrite(1, sin(count) * 1023.0 + 512);
 		
 	}
 	return NULL;
@@ -71,8 +71,8 @@ int main() {
 	setupSegPins();
 	displayValue(0);
 
-	pinMode(15, PWM_OUTPUT);
-	digitalWrite(15, 0);
+	pinMode(1, PWM_OUTPUT);
+	digitalWrite(1, 0);
 
 
 	struct sockaddr_in dest; // info about machine connecting to server
