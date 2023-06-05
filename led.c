@@ -7,6 +7,7 @@ int *root = (int *) 0x7E200000;
 
 int main() {
 
+	root += 9;
 	printf("%u\n",sizeof(int));
 
 	printf("%p\n",root);
