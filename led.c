@@ -4,9 +4,8 @@
 
 #define ROOT 0x7E200000;
 
-void *gpio;
+void *gpio = ROOT;
 
-&gpio = ROOT;
 
 
 int main() {
