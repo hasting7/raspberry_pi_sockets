@@ -15,6 +15,8 @@
 #define PORT 5566
 #define MAX_LEN 256
 
+#define LIGHT 0
+
 volatile int connections = 0;
 
 typedef struct button_info_struct {
@@ -33,13 +35,6 @@ void reset_button();
 void *thread_func(void *data) {
 	printf("thread created\n");
 
-	int count = 0;
-	for (;;) {
-		count++;
-		printf("%.2f\n",sin(count * 0.001) * 512.0 + 512);
-		pwmWrite(1, sin(count * 0.001) * 512.0 + 512);
-		
-	}
 	return NULL;
 }
 
@@ -69,11 +64,7 @@ void reset_button() {
 
 int main() {
 	wiringPiSetup();
-	setupSegPins();
-	displayValue(0);
-
-	pinMode(1, PWM_OUTPUT);
-	pwmWrite(1, 0);
+	pinMode(LIGHT, OUTPUT);
 
 
 	struct sockaddr_in dest; // info about machine connecting to server
@@ -83,8 +74,8 @@ int main() {
 	//char message[MAX_LEN] = { 0 };
 
 
-	//Button reset = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 0.1};
-	//pthread_create(&thread, NULL, button_thread_func, (void *) &reset);
+	Button lights = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 0.1};
+	pthread_create(&thread, NULL, button_thread_func, (void *) &lights);
 
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
@@ -107,7 +98,6 @@ int main() {
 		memcpy(sock, &consocket, sizeof(int));
 
 		// establish connetion
-		displayValue(++connections);
 		
 		//server waits on client
 
