@@ -14,7 +14,7 @@ int main() {
 	//printf("%d\n",*root);
 
 	int mask = 1;
-	for (int i = 0; i < 32; i++) {
+	for (int i = 0; i < 31; i++) {
 		printf(((mask & *root) != 0) ? "1" : "0");
 		mask = mask << 1;
 	}
