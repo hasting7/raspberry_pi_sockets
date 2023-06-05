@@ -10,6 +10,6 @@ void *gpio = (void *) ROOT;
 
 int main() {
 
-	printf("%ls\n",(long *) gpio);
+	printf("%ln\n",(long *) gpio);
 	return 0;
 }
