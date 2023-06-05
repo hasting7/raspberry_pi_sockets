@@ -20,7 +20,7 @@ int main() {
 
 	memset(signal, 0, sizeof(uint8_t) * 24 * 5);
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < (length * 24); i++) {
 		pwmWrite(PIN, signal[i]);
 	}
 
