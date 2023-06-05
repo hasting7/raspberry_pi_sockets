@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <wiringPi.h>
+#include <string.h>
 
 #define PIN 26
 
