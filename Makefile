@@ -11,4 +11,4 @@ client_side:
 
 led_test:
 	git pull origin main
-	gcc -Wall -Werror -std=c17 led.c -o led -lbcm2835
+	gcc -Wall -Werror -std=c17 led.c -o led -l bcm2835
