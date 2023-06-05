@@ -3,7 +3,7 @@
 #include <bcm2835.h>
 
 
-int *root = (int *) 0x7E200000;
+int *root = (int *) 0x7E200004;
 
 int main() {
 
