@@ -8,7 +8,7 @@ int main() {
 	wiringPiSetup();
 	pinMode(PIN, PWM_OUTPUT);
 
-	int signal = 0xffffff;
+	int signal = 0xf;
 	
 	pwmWrite(PIN, signal);
 
