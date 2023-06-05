@@ -6,11 +6,11 @@
 
 void *gpio;
 
-gpio = ROOT;
+&gpio = ROOT;
 
 
 int main() {
 
-	printf("%d\n",(int *) gpio);
+	printf("%ls\n",(int *) gpio);
 	return 0;
 }
