@@ -11,7 +11,7 @@ int main() {
 	printf("%u\n",sizeof(int));
 
 	printf("%p\n",root);
-	printf("%d\n",*root);
+	//printf("%d\n",*root);
 
 	int mask = 1;
 	for (int i = 0; i < 32; i++) {
