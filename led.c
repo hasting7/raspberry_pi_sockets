@@ -28,7 +28,7 @@ int main() {
 		//pwmWrite(PIN, signal[i]);
 	//}
 
-	pwmWrite(PIN, 0x000000);
+	pwmWrite(PIN, 0xf);
 
 	return 0;
 }
