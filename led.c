@@ -30,6 +30,8 @@ int main() {
 
 	pwmWrite(PIN, 0);
 
+	pwmWrite(PIN,1);
+
 
 	return 0;
 }
