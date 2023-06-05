@@ -2,8 +2,7 @@
 #include <stdint.h>
 #include <bcm2835.h>
 
-const int gpio 0x7E200000
-
+const int gpio = 0x7E200000;
 
 
 int main() {
