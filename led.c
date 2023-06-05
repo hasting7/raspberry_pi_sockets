@@ -6,7 +6,7 @@
 
 int *gpio;
 
-&gpio = ROOT;
+gpio = ROOT;
 
 
 int main() {
