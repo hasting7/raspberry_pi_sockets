@@ -15,7 +15,7 @@ void generate_code(uint8_t *bits, int length) {
 
 int main() {
 	wiringPiSetup();
-	pinMode(PIN, PWM_OUTPUT);
+	pinMode(PIN, OUTPUT);
 
 	//int length = 5;
 
@@ -28,7 +28,7 @@ int main() {
 		//pwmWrite(PIN, signal[i]);
 	//}
 
-	pwmWrite(PIN, 1 << 1);
+	DigitalWrite(PIN, HIGH);
 
 	return 0;
 }
