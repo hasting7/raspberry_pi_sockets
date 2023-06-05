@@ -17,16 +17,18 @@ int main() {
 	wiringPiSetup();
 	pinMode(PIN, PWM_OUTPUT);
 
-	int length = 5;
+	//int length = 5;
 
-	uint8_t signal[length * 24];
+	//uint8_t signal[length * 24];
 
-	generate_code(signal, length);
+	//generate_code(signal, length);
 
 
-	for (int i = 0; i < (length * 24); i++) {
-		pwmWrite(PIN, signal[i]);
-	}
+	//for (int i = 0; i < (length * 24); i++) {
+		//pwmWrite(PIN, signal[i]);
+	//}
+
+	pwm(PIN, 0xffffff);
 
 	return 0;
 }
