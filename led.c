@@ -4,13 +4,13 @@
 
 #define ROOT 0x7E200000;
 
-int *gpio;
+void *gpio;
 
 gpio = ROOT;
 
 
 int main() {
 
-	printf("%d\n",*gpio);
+	printf("%d\n",(int *) gpio);
 	return 0;
 }
