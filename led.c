@@ -8,11 +8,10 @@ int main() {
 	wiringPiSetup();
 	pinMode(PIN, PWM_OUTPUT);
 
-	pwmWrite(PIN, 0x000000);
 
-	//int signal = 0xf;
+	uint8_t signal = 0x0;
 	
-	//pwmWrite(PIN, signal);
+	pwmWrite(PIN, signal);
 
 	return 0;
 }
