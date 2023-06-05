@@ -7,8 +7,8 @@
 
 void generate_code(uint8_t *bits, int length) {
 	for (int i = 0; i < length * 3; i += 3) {
-		bits[i] = 0xffff;
-		bits[i+2] = 0x000000; 
+		bits[i] = 0xff;
+		bits[i+2] = 0x00; 
 	}
 }
 
