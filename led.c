@@ -10,9 +10,9 @@ int main() {
 
 	pwmWrite(PIN, 0);
 
-	int signal = 0xf;
+	//int signal = 0xf;
 	
-	pwmWrite(PIN, signal);
+	//pwmWrite(PIN, signal);
 
 	return 0;
 }
