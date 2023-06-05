@@ -4,7 +4,7 @@
 
 #define ROOT 0x7E200000;
 
-void *gpio = ROOT;
+void *gpio = (void *) ROOT;
 
 
 
