@@ -18,7 +18,7 @@ int main() {
 
 	uint8_t signal[length * 24];
 
-	memcpy(signal, 0, sizeof(uint8_t) * 24 * 5);
+	memset(signal, 0, sizeof(uint8_t) * 24 * 5);
 
 	for (int i = 0; i < length; i++) {
 		pwmWrite(PIN, signal[i]);
