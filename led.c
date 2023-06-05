@@ -7,6 +7,8 @@ int *root = (int *) 0x7E200004;
 
 int main() {
 
+	printf("%lu\n",sizeof(int));
+
 	printf("%p\n",root);
 	printf("%d\n",*root);
 
