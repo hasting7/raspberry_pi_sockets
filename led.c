@@ -17,8 +17,9 @@ int main() {
 
 	uint8_t signal[length * 24] = { 0 };
 
-
-	pwmWrite(PIN, signal);
+	for (int i = 0; i < length; i++) {
+		pwmWrite(PIN, signal[i]);
+	}
 
 	return 0;
 }
