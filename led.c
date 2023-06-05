@@ -2,9 +2,11 @@
 #include <stdint.h>
 #include <bcm2835.h>
 
-int * const gpio;
+#define ROOT 0x7E200000;
 
-*gpio = 0x7E200000;
+int *gpio;
+
+&gpio = ROOT;
 
 
 int main() {
