@@ -30,7 +30,7 @@ int main() {
 
 	pwmWrite(PIN, 0);
 
-	pwmWrite(PIN,1);
+	pwmWrite(PIN, 255);
 
 
 	return 0;
