@@ -34,6 +34,7 @@ void reset_button();
 
 void *thread_func(void *data) {
 	int *socket = (int *) data;
+	char message[MAX_LEN] = { 0 };
 
 	printf("thread created\n");
 
@@ -92,7 +93,7 @@ int main() {
 
 	digitalWrite(LIGHT, LOW);
 
-	char message[MAX_LEN] = { 0 };
+	
 
 
 	struct sockaddr_in dest; // info about machine connecting to server
