@@ -109,6 +109,8 @@ int main() {
 	
 		pthread_create(&thread, NULL, thread_func, (void *) &socket);
 
+		printf("connected to client\n");
+
 
 		digitalWrite(LIGHT, HIGH);
 		
