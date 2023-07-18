@@ -15,7 +15,7 @@
 #define PORT 5566
 #define MAX_LEN 256
 
-#define LIGHT 0
+#define LIGHT 15
 
 volatile int connections = 0;
 
@@ -66,6 +66,8 @@ int main() {
 	wiringPiSetup();
 	pinMode(LIGHT, OUTPUT);
 
+	digitalWrite(LIGHT, LOW);
+
 
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
@@ -74,8 +76,8 @@ int main() {
 	//char message[MAX_LEN] = { 0 };
 
 
-	Button lights = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 0.1};
-	pthread_create(&thread, NULL, button_thread_func, (void *) &lights);
+	// Button lights = { .pin = 21, .callback = &reset_button, .last_press = time(NULL), .pause = 0.1};
+	// pthread_create(&thread, NULL, button_thread_func, (void *) &lights);
 
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
@@ -106,6 +108,9 @@ int main() {
 		memcpy(socket, &consocket, sizeof(int));
 	
 		pthread_create(&thread, NULL, thread_func, (void *) &socket);
+
+
+		digitalWrite(LIGHT, HIGH);
 		
 
 		close(*sock);
