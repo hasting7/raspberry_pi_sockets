@@ -120,6 +120,10 @@ int main() {
 
 			if (strcmp(message, "close") == 0) {
 				break;
+			} else if (strcmp(message, "on") == 0) {
+				digitalWrite(LIGHT, HIGH);
+			} else if (strcmp(message, "off") == 0) {
+				digitalWrite(LIGHT, LOW);
 			}
 
 			printf("message from client: %s\n", message);
