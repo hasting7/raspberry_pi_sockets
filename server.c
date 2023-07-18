@@ -59,7 +59,7 @@ void *button_thread_func(void *data) {
 void reset_button() {
 	printf("reset\n");
 	connections = 0;
-	displayValue(0);
+	// displayValue(0);
 }
 
 int main() {
