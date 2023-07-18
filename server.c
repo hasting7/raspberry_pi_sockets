@@ -33,7 +33,31 @@ void *button_thread_func(void *);
 void reset_button();
 
 void *thread_func(void *data) {
+	int *socket = (int *) data;
+
 	printf("thread created\n");
+
+	digitalWrite(LIGHT, HIGH);
+
+	for (;;) {
+		recv(*socket, message, MAX_LEN, 0);
+
+		if (strcmp(message, "close") == 0) {
+			break;
+		} else if (strcmp(message, "on") == 0) {
+			digitalWrite(LIGHT, HIGH);
+		} else if (strcmp(message, "off") == 0) {
+			digitalWrite(LIGHT, LOW);
+		}
+
+		printf("message from client: %s\n", message);
+
+		send(*socket, message, MAX_LEN, 0);
+
+		printf("sending %s to client\n", message);
+		
+	}
+
 
 	return NULL;
 }
@@ -109,33 +133,9 @@ int main() {
 
 		memcpy(socket, &consocket, sizeof(int));
 	
-		// pthread_create(&thread, NULL, thread_func, (void *) &socket);
-
-		printf("connected to client\n");
-		digitalWrite(LIGHT, HIGH);
-
-		for (;;) {
-
-			recv(*socket, message, MAX_LEN, 0);
-
-			if (strcmp(message, "close") == 0) {
-				break;
-			} else if (strcmp(message, "on") == 0) {
-				digitalWrite(LIGHT, HIGH);
-			} else if (strcmp(message, "off") == 0) {
-				digitalWrite(LIGHT, LOW);
-			}
-
-			printf("message from client: %s\n", message);
-
-			send(*socket, message, MAX_LEN, 0);
-
-			printf("sending %s to client\n", message);
+		pthread_create(&thread, NULL, thread_func, (void *) &socket);
 
 		
-		}
-		
-
 		close(*sock);
 
 	}
