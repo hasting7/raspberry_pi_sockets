@@ -68,6 +68,8 @@ int main() {
 
 	digitalWrite(LIGHT, LOW);
 
+	char message[MAX_LEN] = { 0 };
+
 
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
