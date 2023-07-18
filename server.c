@@ -29,16 +29,16 @@ void *thread_func(void *data) {
 
 	printf("new thread %d\n", *socket);
 
-	for (;;) {
-		recv(*socket, message, MAX_LEN, 0);
-		if (message[0] == '\0') continue;
-		printf("message: %s\n", message);
-		if (strcmp(message, "exit") == 0) {
-			printf("closing thread %d\n", *socket);
-			break;
-		}
-		send(*socket, "ok", MAX_LEN, 0);
-	}
+	// for (;;) {
+	// 	recv(*socket, message, MAX_LEN, 0);
+	// 	if (message[0] == '\0') continue;
+	// 	printf("message: %s\n", message);
+	// 	if (strcmp(message, "exit") == 0) {
+	// 		printf("closing thread %d\n", *socket);
+	// 		break;
+	// 	}
+	// 	send(*socket, "ok", MAX_LEN, 0);
+	// }
 
 
 	return NULL;
@@ -85,19 +85,6 @@ int main() {
 		memcpy(socket, &consocket, sizeof(int));
 	
 		// pthread_create(&thread, NULL, thread_func, (void *) &socket);
-
-		char message[MAX_LEN] = { 0 };
-
-		for (;;) {
-			recv(*socket, message, MAX_LEN, 0);
-			if (message[0] == '\0') continue;
-			printf("message: %s\n", message);
-			if (strcmp(message, "exit") == 0) {
-				printf("closing thread %d\n", *socket);
-				break;
-			}
-			send(*socket, "ok", MAX_LEN, 0);
-		}
 
 		close(*sock);
 

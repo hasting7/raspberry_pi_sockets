@@ -24,15 +24,15 @@ int main() {
 	connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr_in));
 	printf("connected to server\n");
 
-	for (;;) {
-		send(mysocket, "Hello world", MAX_LEN, 0);
+	// for (;;) {
+	// 	send(mysocket, "Hello world", MAX_LEN, 0);
 
-		recv(mysocket, message, MAX_LEN, 0);
+	// 	recv(mysocket, message, MAX_LEN, 0);
 
-		printf("server message: %s\n",message);
-	}
-	printf("sending close\n");
-	// send(mysocket, "exit", MAX_LEN, 0);
+	// 	printf("server message: %s\n",message);
+	// }
+	// printf("sending close\n");
+	// // send(mysocket, "exit", MAX_LEN, 0);
 	close(mysocket);	
 
 	return 0;
