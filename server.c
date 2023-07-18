@@ -16,6 +16,7 @@
 #define MAX_LEN 8080
 
 #define LIGHT 15
+#define CONNECTION 16
 
 void setupSegPins();
 void displayValue(int);
@@ -48,8 +49,10 @@ void *thread_func(void *data) {
 int main() {
 	wiringPiSetup();
 	pinMode(LIGHT, OUTPUT);
+	pinMode(CONNECTION, OUTPUT);
 
 	digitalWrite(LIGHT, HIGH);
+	digitalWrite(CONNECTION, LOW);
 
 	
 	struct sockaddr_in dest; // info about machine connecting to server
@@ -85,6 +88,8 @@ int main() {
 		memcpy(socket, &consocket, sizeof(int));
 	
 		// pthread_create(&thread, NULL, thread_func, (void *) &socket);
+
+		digitalWrite(CONNECTION, HIGH);
 
 		close(*sock);
 
