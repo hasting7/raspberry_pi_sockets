@@ -26,7 +26,7 @@ int main() {
 
 
 	printf("sending close\n");
-	send(mysocket, "exit", MAX_LEN, 0);
+	// send(mysocket, "exit", MAX_LEN, 0);
 	close(mysocket);	
 
 	return 0;
