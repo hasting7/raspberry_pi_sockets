@@ -13,7 +13,7 @@
 
 
 #define PORT 5566
-#define MAX_LEN 256
+#define MAX_LEN 80
 
 #define LIGHT 15
 
