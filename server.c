@@ -98,7 +98,7 @@ int main() {
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
 	int mysocket;
-	// pthread_t thread; 
+	pthread_t thread; 
 	//char message[MAX_LEN] = { 0 };
 
 
