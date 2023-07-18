@@ -8,7 +8,7 @@
 #include <sys/socket.h>
 
 #define PORT 5566
-#define MAX_LEN 256
+#define MAX_LEN 8080 // 256
 
 int main() {
 	int mysocket;
