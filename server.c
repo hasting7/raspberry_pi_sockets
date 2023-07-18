@@ -37,7 +37,7 @@ void *thread_func(void *data) {
 			printf("closing thread %d\n", *socket);
 			break;
 		}
-		send(*socket, message, "ok", 0);
+		send(*socket, "ok", MAX_LEN, 0);
 	}
 
 
