@@ -25,8 +25,18 @@ void reset_button();
 
 void *thread_func(void *data) {
 	int *socket = (int *) data;
+	char message[MAX_LEN] = { 0 };
 
 	printf("new thread %d\n", *socket);
+
+	for (;;) {
+		recv(*socket, message, MAX_LEN, 0);
+		if (strcmp(message, "exit") == 0) {
+			printf("closing thread %d\n", *socket);
+			break;
+		}
+	}
+
 
 	return NULL;
 }
