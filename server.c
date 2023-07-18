@@ -110,9 +110,20 @@ int main() {
 		pthread_create(&thread, NULL, thread_func, (void *) &socket);
 
 		printf("connected to client\n");
-
-
 		digitalWrite(LIGHT, HIGH);
+
+		for (;;) {
+
+			recv(mysocket, message, MAX_LEN, 0);
+
+			printf("message from client: %s\n", message);
+
+			send(mysocket, message, MAX_LEN, 0);
+
+			printf("sending %s to client\n", message);
+
+		
+		}
 		
 
 		close(*sock);
