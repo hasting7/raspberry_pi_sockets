@@ -118,6 +118,10 @@ int main() {
 
 			recv(*socket, message, MAX_LEN, 0);
 
+			if (strcmp(message, "close") == 0) {
+				break;
+			}
+
 			printf("message from client: %s\n", message);
 
 			send(*socket, message, MAX_LEN, 0);
