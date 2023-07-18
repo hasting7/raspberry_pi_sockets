@@ -32,7 +32,7 @@ void *thread_func(void *data) {
 	for (;;) {
 		recv(*socket, message, MAX_LEN, 0);
 		if (message == '\0') continue;
-		printf("%s\n", message);
+		printf("message: %s\n", message);
 		if (strcmp(message, "exit") == 0) {
 			printf("closing thread %d\n", *socket);
 			break;
