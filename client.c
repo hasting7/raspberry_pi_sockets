@@ -13,7 +13,7 @@
 int main() {
 	int mysocket;
 	struct sockaddr_in dest;
-	// char message[MAX_LEN] = { 0 };
+	char message[MAX_LEN] = { 0 };
 	
 	mysocket = socket(AF_INET, SOCK_STREAM, 0);
 	
