@@ -13,7 +13,6 @@
 int main() {
 	int mysocket;
 	struct sockaddr_in dest;
-	char message[MAX_LEN] = { 0 };
 	
 	mysocket = socket(AF_INET, SOCK_STREAM, 0);
 	
@@ -24,7 +23,7 @@ int main() {
 	connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr_in));
 	printf("connected to server\n");
 
-	
+
 
 	close(mysocket);	
 
