@@ -12,8 +12,8 @@
 #include <math.h>
 
 
-#define PORT 5566
-#define MAX_LEN 8080
+#define PORT 8080
+#define MAX_LEN 256
 
 #define LIGHT 15
 #define CONNECTION 16
