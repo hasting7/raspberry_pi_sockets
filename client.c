@@ -38,6 +38,12 @@ int main() {
 		printf("type: ");
 		get_input(message);
 
+		if (strcmp(message, "close") == 0) {
+			printf("trigger close thing\n");
+			send(mysocket, message, 0);
+			break;
+		}
+
 		if (message[0] == '\0') continue;
 
 		printf("sending %s to server\n", message);
