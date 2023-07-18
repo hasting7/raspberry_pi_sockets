@@ -49,7 +49,7 @@ int main() {
 	wiringPiSetup();
 	pinMode(LIGHT, OUTPUT);
 
-	digitalWrite(LIGHT, LOW);
+	digitalWrite(LIGHT, HIGH);
 
 	
 	struct sockaddr_in dest; // info about machine connecting to server
