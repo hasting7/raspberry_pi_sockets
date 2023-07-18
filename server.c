@@ -109,18 +109,18 @@ int main() {
 
 		memcpy(socket, &consocket, sizeof(int));
 	
-		pthread_create(&thread, NULL, thread_func, (void *) &socket);
+		// pthread_create(&thread, NULL, thread_func, (void *) &socket);
 
 		printf("connected to client\n");
 		digitalWrite(LIGHT, HIGH);
 
 		for (;;) {
 
-			recv(mysocket, message, MAX_LEN, 0);
+			recv(*socket, message, MAX_LEN, 0);
 
 			printf("message from client: %s\n", message);
 
-			send(mysocket, message, MAX_LEN, 0);
+			send(*socket, message, MAX_LEN, 0);
 
 			printf("sending %s to client\n", message);
 
