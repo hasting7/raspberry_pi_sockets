@@ -25,6 +25,7 @@ int main() {
 	printf("connected to server\n");
 
 
+	printf("sending close\n");
 	send(mysocket, "exit", MAX_LEN, 0);
 	close(mysocket);	
 
