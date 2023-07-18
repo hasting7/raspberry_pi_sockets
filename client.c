@@ -26,6 +26,10 @@ int main() {
 
 	for (;;) {
 		send(mysocket, "Hello world", MAX_LEN, 0);
+
+		recv(mysocket, message, MAX_LEN, 0);
+
+		printf("server message: %s\n",message);
 	}
 	printf("sending close\n");
 	// send(mysocket, "exit", MAX_LEN, 0);
