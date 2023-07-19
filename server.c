@@ -43,7 +43,12 @@ void *thread_func(void *data) {
 int main() {
 	setup();
 
-	cycle_step();
+	int last = time()
+
+	for (;;) {
+		cycle_step();
+		sleep(1);
+	}
 
 	
 	struct sockaddr_in dest; // info about machine connecting to server
