@@ -41,14 +41,9 @@ void *thread_func(void *data) {
 
 
 int main() {
-	wiringPiSetup();
-	pinMode(15, OUTPUT);
-	pinMode(16, OUTPUT);
-	pinMode(1, OUTPUT);
+	setup();
 
-	digitalWrite(15, HIGH);
-	digitalWrite(16, HIGH);
-	digitalWrite(1, HIGH);
+	set_color(OFF);
 	
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server

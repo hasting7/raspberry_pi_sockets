@@ -3,12 +3,12 @@
 
 #include "server.h"
 
-void white() {
-	digitalWrite(RED, HIGH);
-	digitalWrite(BLUE, HIGH);
-	digitalWrite(GREEN, HIGH);
+int rgb[3] = { RED, GREEN, BLUE };
 
-	printf("on\n");
+void set_color(int color) {
+	for (int i = 0; i < 3; i++) {
+		digitalWrite(rgb[i], ((1 < i) & color) != 0 ? HIGH : LOW);
+	}
 }
 
 void setup() {
