@@ -43,8 +43,6 @@ void *thread_func(void *data) {
 int main() {
 	setup();
 
-	int last = time()
-
 	for (;;) {
 		cycle_step();
 		sleep(1);
