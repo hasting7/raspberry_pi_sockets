@@ -10,6 +10,8 @@
 #define GREEN 2
 #define BLUE 1
 #define PURPLE 5
+#define YELLOW 3
+#define CYAN 6
 
 
 void setupSegPins();
