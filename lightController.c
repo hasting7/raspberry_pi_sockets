@@ -16,4 +16,5 @@ void setup() {
 	for (int i = 0; i < 3; i++) {
 		pinMode(rgb[i], OUTPUT);
 	}
+	set_color(OFF);
 } 
