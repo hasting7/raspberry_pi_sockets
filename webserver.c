@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-#define PORT 443
+#define PORT 5566
 #define BUFFER_SIZE 1024
 
 int main() {
