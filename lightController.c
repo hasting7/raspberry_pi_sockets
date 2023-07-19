@@ -4,6 +4,7 @@
 #include "server.h"
 
 int rgb[3] = { RED_PIN, GREEN_PIN, BLUE_PIN };
+int color_cycle[7] = {RED, ON, YELLOW, GREEN, CYAN, BLUE, PURPLE};
 
 void cycle_step() {
 	static int count = 0;
