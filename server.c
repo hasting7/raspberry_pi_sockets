@@ -80,7 +80,6 @@ int main() {
 	
 		// pthread_create(&thread, NULL, thread_func, (void *) &socket);
 
-		digitalWrite(CONNECTION, HIGH);
 
 		close(*sock);
 
