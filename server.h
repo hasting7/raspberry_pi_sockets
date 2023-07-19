@@ -13,7 +13,7 @@
 #define YELLOW 6
 #define CYAN 3
 
-int color_cycle[7] = {RED, ON, YELLOW, GREEN, CYAN, BLUE, PURPLE};
+
 
 void setupSegPins();
 void displayValue(int);
