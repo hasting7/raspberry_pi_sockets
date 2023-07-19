@@ -11,6 +11,8 @@
 #include <time.h>
 #include <math.h>
 
+#include "server.h"
+
 
 #define PORT 8080
 #define MAX_LEN 256
@@ -23,6 +25,8 @@ void displayValue(int);
 void *thread_func(void *);
 void *button_thread_func(void *);
 void reset_button();
+
+
 
 void *thread_func(void *data) {
 	int *socket = (int *) data;
