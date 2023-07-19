@@ -17,16 +17,6 @@
 #define PORT 8080
 #define MAX_LEN 256
 
-#define LIGHT 15
-#define CONNECTION 16
-
-void setupSegPins();
-void displayValue(int);
-void *thread_func(void *);
-void *button_thread_func(void *);
-void reset_button();
-
-
 
 void *thread_func(void *data) {
 	int *socket = (int *) data;
@@ -51,12 +41,9 @@ void *thread_func(void *data) {
 
 
 int main() {
-	wiringPiSetup();
-	pinMode(LIGHT, OUTPUT);
-	pinMode(CONNECTION, OUTPUT);
+	setup();
 
-	digitalWrite(LIGHT, HIGH);
-	digitalWrite(CONNECTION, LOW);
+	white();
 
 	
 	struct sockaddr_in dest; // info about machine connecting to server
