@@ -14,7 +14,7 @@
 #include "server.h"
 
 
-#define PORT 8080
+#define PORT 80
 #define MAX_LEN 256
 
 
