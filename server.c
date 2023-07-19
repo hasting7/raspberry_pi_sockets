@@ -43,6 +43,8 @@ void *thread_func(void *data) {
 int main() {
 	setup();
 
+	digitalWrite(RED, HIGH);
+
 	white();
 
 	
