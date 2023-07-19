@@ -44,7 +44,6 @@ int main() {
 	setup();
 	set_color(OFF);
 
-	set_color(5);
 	
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
