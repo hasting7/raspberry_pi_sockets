@@ -13,8 +13,8 @@ void displayValue(int);
 void *thread_func(void *);
 void *button_thread_func(void *);
 void reset_button();
-void white();
 void setup();
+void set_color();
 
 extern int rgb[3];
 
