@@ -4,8 +4,8 @@
 #define RED 15 
 #define GREEN 16
 #define BLUE 1
-#define ON 7;
-#define OFF 0;
+#define ON 7
+#define OFF 0
 
 
 void setupSegPins();
