@@ -42,6 +42,7 @@ void *thread_func(void *data) {
 
 int main() {
 	setup();
+	set_color(OFF);
 
 	set_color(5);
 	
