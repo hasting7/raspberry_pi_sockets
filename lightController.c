@@ -6,6 +6,8 @@ void white() {
 	digitalWrite(RED, HIGH);
 	digitalWrite(BLUE, HIGH);
 	digitalWrite(GREEN, HIGH);
+
+	printf("on\n");
 }
 
 void setup() {
