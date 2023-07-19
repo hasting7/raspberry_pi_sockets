@@ -13,6 +13,7 @@
 #define YELLOW 6
 #define CYAN 3
 
+int cycle[7] = {RED, ON, YELLOW, GREEN, CYAN, BLUE, PURPLE};
 
 void setupSegPins();
 void displayValue(int);
@@ -21,6 +22,7 @@ void *button_thread_func(void *);
 void reset_button();
 void setup();
 void set_color();
+void cycle_step();
 
 extern int rgb[3];
 
