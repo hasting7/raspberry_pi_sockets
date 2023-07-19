@@ -1,11 +1,14 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#define RED 15 
-#define GREEN 16
-#define BLUE 1
+#define RED_PIN 15 
+#define GREEN_PIN 16
+#define BLUE_PIN 1
 #define ON 7
 #define OFF 0
+#define RED 4
+#define GREEN 2
+#define BLUE 1
 
 
 void setupSegPins();

@@ -3,7 +3,7 @@
 
 #include "server.h"
 
-int rgb[3] = { RED, GREEN, BLUE };
+int rgb[3] = { RED_PIN, GREEN_PIN, BLUE_PIN };
 
 void set_color(int color) {
 	for (int i = 0; i < 3; i++) {
@@ -13,7 +13,7 @@ void set_color(int color) {
 
 void setup() {
 	wiringPiSetup();
-	pinMode(RED, OUTPUT);
-	pinMode(BLUE, OUTPUT);
-	pinMode(GREEN, OUTPUT);
+	for (int i = 0; i < 3; i++) {
+		pinMode(rgb[i], OUTPUT);
+	}
 } 
