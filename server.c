@@ -43,7 +43,7 @@ void *thread_func(void *data) {
 int main() {
 	setup();
 
-	set_color(CYAN);
+	cycle_step();
 
 	
 	struct sockaddr_in dest; // info about machine connecting to server

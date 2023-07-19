@@ -11,7 +11,7 @@ void cycle_step() {
 		count = 0;
 	}
 
-	set_color(cycle[count]);
+	set_color(color_cycle[count]);
 
 	count++;
 }
