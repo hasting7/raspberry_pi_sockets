@@ -9,6 +9,20 @@
 #define PORT 5566
 #define BUFFER_SIZE 1024
 
+#define MAX_FILE_SIZE 10000000
+
+char *read_file(char *name) {
+    FILE *fp = fopen(name, "r");
+    char file_content[MAX_FILE_SIZE] = { 0 };
+
+    fread(fp,"%s",&file_content);
+
+    printf("file read says:\n,%s",file_content);
+
+    close(fp);
+    return NULL;
+}
+
 int main() {
     char buffer[BUFFER_SIZE];
     char resp[] = "HTTP/1.0 200 OK\r\n"
@@ -49,6 +63,8 @@ int main() {
         return 1;
     }
     printf("server listening for connections\n");
+
+    read_file("main.html");
 
     for (;;) {
         // Accept incoming connections
