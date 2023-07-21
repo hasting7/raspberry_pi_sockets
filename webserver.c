@@ -19,15 +19,24 @@ char *read_file(char *);
 char *read_file(char *name) {
     printf("READING\n");
     FILE *fp = fopen(name, "r");
+    FILE *header_p = fopen("header", "r");
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
     int index = 0;
     char resp;
 
-    for (int i = 0; i < 100; i++) {
-        file_content[index] = '\r';
+    while(!feof(header_p)) {
+        resp = fgetc(fp);
+        if (feof(fp)) break;
+        file_content[index] = resp;
+        if (resp == '\n') {
+            printf("newline\n");
+            index++;
+            file_content[index] = '\r';
+        }
         index++;
     }
 
+    printf("header file read:\n%s",file_content);
 
     while (!feof(fp)) {
         resp = fgetc(fp);
@@ -37,6 +46,9 @@ char *read_file(char *name) {
     }
     // *file_content = "\r";
     fclose(fp);
+    fclose(header_p);
+
+    printf("final file read:\n%s",file_content);
     return file_content;
 }
 
@@ -45,11 +57,7 @@ int main() {
 
     // char *file = read_file("main.html");
 
-    // printf("%s",file);
-
-    char resp[] = "HTTP/1.0 200 OK\r\nServer: webserver-c\r\nContent-type: text/html\r\n\r\n<html>Hello world</html>";
-    // strcat(resp,file);
-    // strcat(resp,"\r\n");
+    char *resp = read_file("main.html");
 
 
     printf("%s",resp);
