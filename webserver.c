@@ -16,7 +16,7 @@ char *read_file(char *name) {
     FILE *fp = fopen(name, "r");
     char file_content[MAX_FILE_SIZE] = { 0 };
 
-    fscanf(fp,"%s",&file_content);
+    fscanf(fp,"%s",file_content);
 
     printf("file read says:\n,%s",file_content);
 
