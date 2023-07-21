@@ -40,8 +40,10 @@ int main() {
 
     printf("%s",file);
 
-    char resp[] = "HTTP/1.0 200 OK\r\nServer: webserver-c\r\nContent-type: text/html\r\n\r\n<html>HELLO WORLD</html\r\n";
+    // char resp[] = "HTTP/1.0 200 OK\r\nServer: webserver-c\r\nContent-type: text/html\r\n\r\n<html>HELLO WORLD</html\r\n";
     // strcat(resp,file);
+
+    char *resp = file;
 
     printf("%s",resp);
 
