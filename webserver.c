@@ -43,6 +43,8 @@ int main() {
     char resp[] = "HTTP/1.0 200 OK\r\nServer: webserver-c\r\nContent-type: text/html\r\n\r\n";
     strcat(resp,file);
 
+    printf("%s",resp);
+
     // Create a socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
