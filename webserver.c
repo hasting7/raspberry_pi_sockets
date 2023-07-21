@@ -22,7 +22,7 @@ char *read_file(char *name) {
     int resp;
 
     while (!feof(fp)) {
-        resp = fscanf(fp,"%s[ ^\n]\n",file_content);
+        resp = fscanf(fp,"%s[ ]",file_content);
         printf("resp from line is %d: %s\n",resp, file_content);
     }
     
