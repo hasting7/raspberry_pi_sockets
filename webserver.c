@@ -40,10 +40,8 @@ int main() {
 
     printf("%s",file);
 
-    char resp[] = "HTTP/1.0 200 OK\r\n"
-                  "Server: webserver-c\r\n"
-                  "Content-type: text/html\r\n\r\n"
-                  file;
+    char resp[] = "HTTP/1.0 200 OK\r\nServer: webserver-c\r\nContent-type: text/html\r\n\r\n";
+    strcat(resp,file);
 
     // Create a socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
