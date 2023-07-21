@@ -8,3 +8,8 @@ client_side:
 	git commit -am 'update'
 	git push origin main
 	gcc -Wall -Werror -std=c17 client.c -o client
+
+
+website:
+	git pull origin main
+	gcc -Wall -Werror -std=c17 -o web webserver.c
