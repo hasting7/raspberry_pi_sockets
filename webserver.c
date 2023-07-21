@@ -43,7 +43,7 @@ char *read_file(char *name) {
 int main() {
     char buffer[BUFFER_SIZE];
 
-    char *file = read_file("main.html");
+    // char *file = read_file("main.html");
 
     // printf("%s",file);
 
