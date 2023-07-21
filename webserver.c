@@ -20,8 +20,11 @@ char *read_file(char *name) {
     FILE *fp = fopen(name, "r");
     char file_content[MAX_FILE_SIZE] = { 0 };
 
-    fscanf(fp,"%s",file_content);
-
+    while (feof(fp) != 0) {
+        fscanf(fp,"%s[^\n]\n",file_content);
+        printf("%s\n",file_content);
+    }
+    
     printf("file read says:\n,%s",file_content);
 
     fclose(fp);
