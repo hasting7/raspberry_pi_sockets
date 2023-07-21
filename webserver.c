@@ -22,13 +22,14 @@ char *read_file(char *name) {
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
     int index = 0;
     char resp;
+    char *eof = "\r\n";
 
     while (!feof(fp)) {
         resp = fgetc(fp);
         file_content[index] = resp;
         index++;
     }
-    file_content[index] = "\r\n";
+    file_content[index] = eof;
     fclose(fp);
     return file_content;
 }
