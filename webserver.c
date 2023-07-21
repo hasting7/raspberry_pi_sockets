@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define PORT 5566
 #define BUFFER_SIZE 1024
