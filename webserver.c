@@ -22,25 +22,25 @@ char *read_file(char *name) {
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
     int index = 0;
     char resp;
+    fgetc(fp);
 
     while (!feof(fp)) {
         resp = fgetc(fp);
         file_content[index] = resp;
         index++;
     }
-    
-    printf("file read says:\n,%s",file_content);
-
     fclose(fp);
     return file_content;
 }
 
 int main() {
     char buffer[BUFFER_SIZE];
+
+    char *file = read_file("main.html");
     char resp[] = "HTTP/1.0 200 OK\r\n"
                   "Server: webserver-c\r\n"
                   "Content-type: text/html\r\n\r\n"
-                  "<html>hello, world</html>\r\n";
+                  file;
 
     // Create a socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -76,9 +76,6 @@ int main() {
     }
     printf("server listening for connections\n");
 
-    char *file = read_file("main.html");
-
-    free(file);
 
     for (;;) {
         // Accept incoming connections
@@ -120,6 +117,8 @@ int main() {
 
         close(newsockfd);
     }
+
+    free(file);
 
     return 0;
 }
