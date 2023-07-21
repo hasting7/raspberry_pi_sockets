@@ -19,11 +19,13 @@ char *read_file(char *name) {
     printf("READING\n");
     FILE *fp = fopen(name, "r");
     char file_content[MAX_FILE_SIZE] = { 0 };
-    int resp;
+    int index = 0;
+    char resp;
 
     while (!feof(fp)) {
-        resp = fscanf(fp,"%s[ ]",file_content);
-        printf("resp from line is %d: %s\n",resp, file_content);
+        resp = fgetc(fp);
+        file_content[index] = resp;
+        index++;
     }
     
     printf("file read says:\n,%s",file_content);
