@@ -28,7 +28,7 @@ char *read_file(char *name) {
         file_content[index] = resp;
         index++;
     }
-    // file_content[index] = "\r";
+    file_content[index] = "\r\n";
     fclose(fp);
     return file_content;
 }
