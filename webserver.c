@@ -12,6 +12,7 @@
 #define MAX_FILE_SIZE 10000000
 
 char *read_file(char *name) {
+    printf("READING\n");
     FILE *fp = fopen(name, "r");
     char file_content[MAX_FILE_SIZE] = { 0 };
 
