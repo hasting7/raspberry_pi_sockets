@@ -29,6 +29,7 @@ char *read_file(char *name) {
         file_content[index] = resp;
         index++;
     }
+    file_content[index] = "\r";
     fclose(fp);
     return file_content;
 }
@@ -37,11 +38,13 @@ int main() {
     char buffer[BUFFER_SIZE];
 
     char *file = read_file("main.html");
-    char resp[] = {"HTTP/1.0 200 OK\r\n",
-                  "Server: webserver-c\r\n",
-                  "Content-type: text/html\r\n\r\n",
-                  file;
-    }
+
+    printf("%s",file);
+
+    char resp[] = "HTTP/1.0 200 OK\r\n"
+                  "Server: webserver-c\r\n"
+                  "Content-type: text/html\r\n\r\n"
+                  "<html>hello, world</html>\r\n";
 
     // Create a socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -118,8 +121,6 @@ int main() {
 
         close(newsockfd);
     }
-
-    free(file);
 
     return 0;
 }
