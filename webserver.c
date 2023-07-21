@@ -26,7 +26,7 @@ char *read_file(char *name) {
 
     while(!feof(header_p)) {
         resp = fgetc(header_p);
-        if (feof(fp)) break;
+        if (feof(header_p)) break;
         file_content[index] = resp;
         if (resp == '\n') {
             printf("newline\n");
@@ -35,6 +35,10 @@ char *read_file(char *name) {
         }
         index++;
     }
+
+    file_content[index] = '\n';
+    file_content[index + 1] = '\r';
+    index += 2;
 
     printf("header file read:\n%s",file_content);
 
