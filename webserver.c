@@ -41,7 +41,7 @@ int main() {
     printf("%s",file);
 
     char resp[] = "HTTP/1.0 200 OK\r\nServer: webserver-c\r\nContent-type: text/html\r\n\r\n<html>HELLO WORLD</html\r\n";
-    strcat(resp,file);
+    // strcat(resp,file);
     strcat(resp,"\r\n");
 
 
