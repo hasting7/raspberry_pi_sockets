@@ -22,7 +22,6 @@ char *read_file(char *name) {
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
     int index = 0;
     char resp;
-    fgetc(fp);
 
     while (!feof(fp)) {
         resp = fgetc(fp);
@@ -44,7 +43,7 @@ int main() {
     char resp[] = "HTTP/1.0 200 OK\r\n"
                   "Server: webserver-c\r\n"
                   "Content-type: text/html\r\n\r\n"
-                  "<html>hello, world</html>\r\n";
+                  file;
 
     // Create a socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
