@@ -25,7 +25,7 @@ char *read_file(char *name) {
     char resp;
 
     while(!feof(header_p)) {
-        resp = fgetc(fp);
+        resp = fgetc(header_p);
         if (feof(fp)) break;
         file_content[index] = resp;
         if (resp == '\n') {
