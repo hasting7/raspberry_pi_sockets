@@ -20,7 +20,7 @@ char *read_file(char *name) {
     printf("READING\n");
     FILE *fp = fopen(name, "r");
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
-    int index = 0;
+    int index = 300;
     char resp;
 
     while (!feof(fp)) {
