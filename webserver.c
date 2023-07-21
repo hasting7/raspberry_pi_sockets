@@ -18,7 +18,7 @@ char *read_file(char *);
 char *read_file(char *name) {
     printf("READING\n");
     FILE *fp = fopen(name, "r");
-    char file_content[MAX_FILE_SIZE] = { 0 };
+    char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
     int index = 0;
     char resp;
 
@@ -31,7 +31,7 @@ char *read_file(char *name) {
     printf("file read says:\n,%s",file_content);
 
     fclose(fp);
-    return NULL;
+    return file_content;
 }
 
 int main() {
@@ -75,7 +75,9 @@ int main() {
     }
     printf("server listening for connections\n");
 
-    read_file("main.html");
+    char *file = read_file("main.html");
+
+    free(file);
 
     for (;;) {
         // Accept incoming connections
