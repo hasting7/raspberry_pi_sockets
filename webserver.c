@@ -20,8 +20,13 @@ char *read_file(char *name) {
     printf("READING\n");
     FILE *fp = fopen(name, "r");
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
-    int index = 300;
+    int index = 0;
     char resp;
+
+    for (int i = 0; i < 300; i++) {
+        file_content[index] = ' ';
+        index++;
+    }
 
     while (!feof(fp)) {
         resp = fgetc(fp);
