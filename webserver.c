@@ -9,7 +9,11 @@
 #define PORT 5566
 #define BUFFER_SIZE 1024
 
-#define MAX_FILE_SIZE 10000000
+#define MAX_FILE_SIZE 100000
+
+char *read_file(char *);
+
+
 
 char *read_file(char *name) {
     printf("READING\n");
