@@ -47,9 +47,9 @@ int main() {
 
     // printf("%s",file);
 
-    char resp[] = "HTTP/1.0 200 OK\r\nServer: webserver-c\r\nContent-type: text/html\r\n\r\n";
-    strcat(resp,file);
-    strcat(resp,"\r\n");
+    char resp[] = "HTTP/1.0 200 OK\r\nServer: webserver-c\r\nContent-type: text/html\r\n\r\n<html>Hello world</html>";
+    // strcat(resp,file);
+    // strcat(resp,"\r\n");
 
 
     printf("%s",resp);
