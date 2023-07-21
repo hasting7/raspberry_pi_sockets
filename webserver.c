@@ -21,7 +21,7 @@ char *read_file(char *name) {
     char file_content[MAX_FILE_SIZE] = { 0 };
     int resp;
 
-    while (feof(fp) != 0) {
+    while (feof(fp) != -1) {
         resp = fscanf(fp,"%s[^\n]\n",file_content);
         printf("resp from line is %d: %s\n",resp, file_content);
     }
