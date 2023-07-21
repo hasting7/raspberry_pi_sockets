@@ -23,7 +23,7 @@ char *read_file(char *name) {
     int index = 0;
     char resp;
 
-    for (int i = 0; i < 80; i++) {
+    for (int i = 0; i < 100; i++) {
         file_content[index] = '\r';
         index++;
     }
