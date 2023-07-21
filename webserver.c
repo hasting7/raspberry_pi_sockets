@@ -37,10 +37,11 @@ int main() {
     char buffer[BUFFER_SIZE];
 
     char *file = read_file("main.html");
-    char resp[] = "HTTP/1.0 200 OK\r\n"
-                  "Server: webserver-c\r\n"
-                  "Content-type: text/html\r\n\r\n"
+    char resp[] = {"HTTP/1.0 200 OK\r\n",
+                  "Server: webserver-c\r\n",
+                  "Content-type: text/html\r\n\r\n",
                   file;
+    }
 
     // Create a socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
