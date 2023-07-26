@@ -30,12 +30,12 @@ void *thread_func(void *data) {
     struct sockaddr_in client_addr;
     int client_addrlen = sizeof(client_addr);
 
-    // // Get client address
-    // int sockn = getsockname(*socket, (struct sockaddr *)&client_addr, (socklen_t *)&client_addrlen);
-    // if (sockn < 0) {
-    //     perror("webserver (getsockname)");
-    //     continue;
-    // }
+    // Get client address
+    int sockn = getsockname(*socket, (struct sockaddr *)&client_addr, (socklen_t *)&client_addrlen);
+    if (sockn < 0) {
+        perror("webserver (getsockname)");
+        continue;
+    }
 
     while (1) {
         // Read from the socket
