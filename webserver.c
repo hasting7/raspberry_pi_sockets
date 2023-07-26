@@ -121,7 +121,7 @@ void parse_web_response(char *uri) {
 
 int main() {
     setup();
-    pthread_t thread; 
+    // pthread_t thread; 
     
     
 
