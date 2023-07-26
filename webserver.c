@@ -34,7 +34,7 @@ void *thread_func(void *data) {
     int sockn = getsockname(*socket, (struct sockaddr *)&client_addr, (socklen_t *)&client_addrlen);
     if (sockn < 0) {
         perror("webserver (getsockname)");
-        continue;
+        return NULL;
     }
 
     while (1) {
