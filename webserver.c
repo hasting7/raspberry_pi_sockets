@@ -66,7 +66,7 @@ void parse_web_response(char *uri) {
         for (; uri[last] != '\0'; last++) {
             printf("char %c\n", uri[last]);
         }
-        state = last;
+        sscanf(last, "%d", &state);
         printf("state: %d\n",state);
     }
 
