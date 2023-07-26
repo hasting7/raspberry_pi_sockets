@@ -59,10 +59,7 @@ void parse_web_response(char *uri) {
     static int state = 0;
     if (strncmp(uri,"/?", 2) != 0) return; 
 
-    *uri += 2;
-    printf("idk if ythis works %s\n",uri);
-
-    if (strncmp(uri,"colors=",7) == 0) {
+    if (strncmp(uri,"/?colors=",9) == 0) {
         printf("clicked a color btn\n");
         printf("%s\n",uri);
     }
