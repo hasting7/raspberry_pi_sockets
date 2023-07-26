@@ -54,10 +54,11 @@ char *read_file(char *name) {
 }
 
 void parse_web_response(char *uri) {
+    static int state = 1;
     if (strncmp(uri,"/?", 2) != 0) return; 
 
-
-
+    state |= 1;
+    printf("state of lights: %d\n",state);
 }
 
 int main() {

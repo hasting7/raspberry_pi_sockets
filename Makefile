@@ -12,4 +12,4 @@ client_side:
 
 website:
 	git pull origin main
-	gcc -Wall -Werror -std=c17 -o web webserver.c
+	gcc -Wall -Werror -std=c17 -o web lightController.c webserver.c
