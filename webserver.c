@@ -171,7 +171,7 @@ int main() {
 
         int *socket = malloc(sizeof(int *));
 
-        memcpy(socket, &newsockfd, sizeof(int));
+        memcpy(*socket, &newsockfd, sizeof(int));
     
         pthread_create(&thread, NULL, thread_func, (void *) &socket);
 
