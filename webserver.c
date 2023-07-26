@@ -7,17 +7,17 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+
 #define PORT 5566
 #define BUFFER_SIZE 1024
 
 #define MAX_FILE_SIZE 100000
 
 char *read_file(char *);
-
+void parse_web_response(char *);
 
 
 char *read_file(char *name) {
-    printf("READING\n");
     FILE *fp = fopen(name, "r");
     FILE *header_p = fopen("header", "r");
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
@@ -29,18 +29,16 @@ char *read_file(char *name) {
         if (feof(header_p)) break;
         file_content[index] = resp;
         if (resp == '\n') {
-            printf("newline\n");
             index++;
             file_content[index] = '\r';
         }
         index++;
     }
-
-    file_content[index] = '\n';
-    file_content[index + 1] = '\r';
-    index += 2;
-
-    printf("header file read:\n%s",file_content);
+    for (int i = 0; i < 2; i++) {
+        file_content[index] = '\n';
+        file_content[index + 1] = '\r';
+        index += 2;
+    }
 
     while (!feof(fp)) {
         resp = fgetc(fp);
@@ -48,21 +46,24 @@ char *read_file(char *name) {
         file_content[index] = resp;
         index++;
     }
-    // *file_content = "\r";
+
     fclose(fp);
     fclose(header_p);
 
-    printf("final file read:\n%s",file_content);
     return file_content;
+}
+
+void parse_web_response(char *uri) {
+    if (strncmp(uri,"/?", 2) != 0) return; 
+
+
+
 }
 
 int main() {
     char buffer[BUFFER_SIZE];
 
-    // char *file = read_file("main.html");
-
-    char *resp = read_file("main.html");
-
+    char *resp = NULL;
 
     printf("%s",resp);
 
@@ -131,6 +132,10 @@ int main() {
         sscanf(buffer, "%s %s %s", method, uri, version);
         printf("[%s:%u] %s %s %s\n", inet_ntoa(client_addr.sin_addr),
                ntohs(client_addr.sin_port), method, version, uri);
+
+        parse_web_response(uri);
+
+        resp = read_file("main.html");
 
         // Write to the socket
         int valwrite = write(newsockfd, resp, strlen(resp));
