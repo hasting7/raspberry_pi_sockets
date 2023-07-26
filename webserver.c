@@ -66,6 +66,8 @@ void parse_web_response(char *uri) {
         printf("%s\n",uri);
     }
 
+    state ^= 1;
+
 }
 
 int main() {
