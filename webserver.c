@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include "server.h"
+
 
 #define PORT 5566
 #define BUFFER_SIZE 1024
