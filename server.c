@@ -52,7 +52,7 @@ int main() {
 	struct sockaddr_in dest; // info about machine connecting to server
 	struct sockaddr_in serv; // info about server
 	int mysocket;
-	// pthread_t thread; 
+	pthread_t thread; 
 
 	socklen_t socksize = sizeof(struct sockaddr_in);
 
@@ -81,7 +81,7 @@ int main() {
 
 		memcpy(socket, &consocket, sizeof(int));
 	
-		// pthread_create(&thread, NULL, thread_func, (void *) &socket);
+		pthread_create(&thread, NULL, thread_func, (void *) &socket);
 
 
 		close(*sock);
