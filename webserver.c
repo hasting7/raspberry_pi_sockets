@@ -175,7 +175,7 @@ int main() {
 
         printf("after memcpy thread socket: %d\n",*socket);
     
-        pthread_create(&thread, NULL, thread_func, (void *) &socket);
+        pthread_create(&thread, NULL, thread_func, (void *) socket);
 
         printf("new client connected\n");
 
