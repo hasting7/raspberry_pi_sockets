@@ -157,6 +157,9 @@ int main() {
     }
     printf("server listening for connections\n");
 
+    char buffer[BUFFER_SIZE];
+    char *resp = NULL;
+
 
     for (;;) {
         // Accept incoming connections
@@ -169,15 +172,48 @@ int main() {
 
         printf("before thread socket: %d\n",newsockfd);
 
-        int *socket = malloc(sizeof(int *));
+        // int *socket = malloc(sizeof(int *));
 
-        memcpy(socket, &newsockfd, sizeof(int));
+        // memcpy(socket, &newsockfd, sizeof(int));
 
-        printf("after memcpy thread socket: %d\n",*socket);
-    
-        pthread_create(&thread, NULL, thread_func, (void *) socket);
+        // pthread_create(&thread, NULL, thread_func, (void *) socket);
 
         printf("new client connected\n");
+
+        // Create client address
+        struct sockaddr_in client_addr;
+        int client_addrlen = sizeof(client_addr);
+
+    // Get client address
+        int sockn = getsockname(*socket, (struct sockaddr *)&client_addr, (socklen_t *)&client_addrlen);
+        if (sockn < 0) {
+            perror("webserver (getsockname)");
+            continue
+        }
+
+
+        int valread = read(*socket, buffer, BUFFER_SIZE);
+        if (valread < 0) {
+            perror("webserver (read)");
+            continue;
+        }
+
+        // Read the request
+        char method[BUFFER_SIZE], uri[BUFFER_SIZE], version[BUFFER_SIZE];
+        sscanf(buffer, "%s %s %s", method, uri, version);
+        printf("[%s:%u] %s %s %s\n", inet_ntoa(client_addr.sin_addr),
+            ntohs(client_addr.sin_port), method, version, uri);
+
+        parse_web_response(uri);
+
+        resp = read_file("main.html");
+
+        // Write to the socket
+        int valwrite = write(*socket, resp, strlen(resp));
+        if (valwrite < 0) {
+            perror("webserver (write)");
+            continue;
+        }
 
         
         close(newsockfd);
