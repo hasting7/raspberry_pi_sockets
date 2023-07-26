@@ -167,6 +167,8 @@ int main() {
             continue;
         }
 
+        printf("before thread socket: %d\n",newsockfd);
+
         int *socket = malloc(sizeof(int *));
 
         memcpy(socket, &newsockfd, sizeof(int));
