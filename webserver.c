@@ -23,6 +23,7 @@ void parse_web_response(char *);
 
 void *thread_func(void *data) {
     int *socket = (int *) data;
+    printf("socket addr %d\n",*socket);
     char buffer[BUFFER_SIZE];
     char *resp = NULL;
 
