@@ -59,10 +59,13 @@ void parse_web_response(char *uri) {
     static int state = 0;
     if (strncmp(uri,"/?", 2) != 0) return; 
 
-    state ^= 1;
-    printf("state of lights: %d\n",state);
+    *uri += 2;
 
-    set_color(state == 0 ? OFF : ON);
+    if (strncmp(uri,"colors=",7) == 0) {
+        printf("clicked a color btn\n");
+        printf("%s\n",uri);
+    }
+
 }
 
 int main() {

@@ -3,6 +3,36 @@
 h1 {
 	color: pink;
 }
+form {
+}
+
+/*#colors {
+	background-color: pink;
+}*/
+
+#colors button {
+	width: 30%;
+	height: 30%;
+}
+
+#red {
+	background-color: red;
+}
+#blue {
+	background-color: royalblue;
+}
+#green {
+	background-color: green;
+}
+#yellow {
+	background-color: yellow;
+}
+#cyan {
+	background-color: darkcyan;
+}
+#purple {
+	background-color: purple;
+}
 </style>
 <div>
 	<h1>
@@ -10,19 +40,19 @@ h1 {
 	</h1>
 </div>
 <div>
-	<form method="get">
-		<button name="lights" value="1">on</button>
-		<button name="lights" value="0">off</button>
+	<form method="get" id="toggle">
+		<button name="lights" value="1" id="on">on</button>
+		<button name="lights" value="0" id="off">off</button>
 		<br/>	
 	</form>
-	<form method="get">
-		<button name="colors" value="4">red</button>
-		<button name="colors" value="1">blue</button>
-		<button name="colors" value="2">green</button>
+	<form method="get" id="colors">
+		<button name="colors" value="4" id="red">red</button>
+		<button name="colors" value="1" id="blue">blue</button>
+		<button name="colors" value="2" id="green">green</button>
 		<br/>
-		<button name="colors" value="6">yellow</button>
-		<button name="colors" value="5">cyan</button>
-		<button name="colors" value="3">purple</button>
+		<button name="colors" value="6" id="yellow">yellow</button>
+		<button name="colors" value="5" id="cyan">cyan</button>
+		<button name="colors" value="3" id="purple">purple</button>
 		<br/>	
 	</form>
 </div>
