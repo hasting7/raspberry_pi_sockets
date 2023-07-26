@@ -69,7 +69,7 @@ void parse_web_response(char *uri) {
         state = last;
     }
 
-    set_color(last);
+    set_color(state);
 
 }
 
