@@ -67,6 +67,7 @@ void parse_web_response(char *uri) {
             printf("char %c\n", uri[last]);
         }
         state = last;
+        printf("state: %d\n",state);
     }
 
     set_color(state);
