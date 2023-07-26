@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <pthread.h>
 
 #include "server.h"
 
@@ -27,7 +28,7 @@ void *thread_func(void *data) {
     while (1) {
 
      // Get client address
-        int sockn = getsockname(newsockfd, (struct sockaddr *)&client_addr,
+        int sockn = getsockname(*socket, (struct sockaddr *)&client_addr,
                                 (socklen_t *)&client_addrlen);
         if (sockn < 0) {
             perror("webserver (getsockname)");
@@ -35,7 +36,7 @@ void *thread_func(void *data) {
         }
 
         // Read from the socket
-        int valread = read(newsockfd, buffer, BUFFER_SIZE);
+        int valread = read(*socket, buffer, BUFFER_SIZE);
         if (valread < 0) {
             perror("webserver (read)");
             continue;
@@ -52,7 +53,7 @@ void *thread_func(void *data) {
         resp = read_file("main.html");
 
         // Write to the socket
-        int valwrite = write(newsockfd, resp, strlen(resp));
+        int valwrite = write(*socket, resp, strlen(resp));
         if (valwrite < 0) {
             perror("webserver (write)");
             continue;
@@ -60,7 +61,7 @@ void *thread_func(void *data) {
 
     }
 
-
+    free(socket);
     return NULL;
 }
 
@@ -170,7 +171,7 @@ int main() {
     
         pthread_create(&thread, NULL, thread_func, (void *) &socket);
 
-        printf("new client connected\n")
+        printf("new client connected\n");
 
         
         close(newsockfd);
