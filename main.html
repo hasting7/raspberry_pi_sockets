@@ -1,18 +1,42 @@
 <html>
 <style>
 h1 {
-	color: pink;
+	color: white;
+	font-family: Verdana;
+	text-align: center;
+	width: 100%;
+	font-size: 48px;
 }
-form {
+html {
+	background-color: black;
+}
+#toggle {
+	display: flex;
 }
 
-/*#colors {
-	background-color: pink;
-}*/
+#colors {
+	display: flex;
+	width: 100%;
+	height: inherit;
+}
 
 #colors button {
+	flex: auto;
 	width: 30%;
-	height: 30%;
+	height: 200px;
+	margin: 0.3%;
+	border-radius: 10px;
+}
+
+#toggle button {
+	flex: 1;
+	width: 50%;
+	height: 100px;
+	margin: 0.5%;
+	font-family: Verdana;
+	font-size: 200%;
+	background-color: white;
+	border-radius: 10px;
 }
 
 #red {
@@ -36,7 +60,7 @@ form {
 </style>
 <div>
 	<h1>
-		My Light Controller
+		Closet Light Controller
 	</h1>
 </div>
 <div>
@@ -46,14 +70,14 @@ form {
 		<br/>	
 	</form>
 	<form method="get" id="colors">
-		<button name="colors" value="4" id="red">red</button>
-		<button name="colors" value="1" id="blue">blue</button>
-		<button name="colors" value="2" id="green">green</button>
-		<br/>
-		<button name="colors" value="6" id="yellow">yellow</button>
-		<button name="colors" value="3" id="cyan">cyan</button>
-		<button name="colors" value="5" id="purple">purple</button>
-		<br/>	
+		<button name="colors" value="4" id="red"></button>
+		<button name="colors" value="1" id="blue"></button>
+		<button name="colors" value="2" id="green"></button>
+	</form>
+	<form method="get" id="colors">
+		<button name="colors" value="6" id="yellow"></button>
+		<button name="colors" value="3" id="cyan"></button>
+		<button name="colors" value="5" id="purple"></button>
 	</form>
 </div>
 
