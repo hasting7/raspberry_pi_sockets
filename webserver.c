@@ -59,6 +59,8 @@ void parse_web_response(char *uri) {
 
     state ^= 1;
     printf("state of lights: %d\n",state);
+
+    set_color(state == 0 ? OFF : ON);
 }
 
 int main() {
