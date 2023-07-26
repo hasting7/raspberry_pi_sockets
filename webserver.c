@@ -62,6 +62,10 @@ void parse_web_response(char *uri) {
     if (strncmp(uri,"/?colors=",9) == 0) {
         printf("clicked a color btn\n");
         printf("%s\n",uri);
+
+        for (int i = 0; uri[i+1] != '\0'; i++) {
+            printf("char %c\n", uri[i]);
+        }
     }
 
     state ^= 1;
