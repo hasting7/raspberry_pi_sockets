@@ -19,57 +19,6 @@
 char *read_file(char *);
 void parse_web_response(char *);
 
-
-
-void *thread_func(void *data) {
-    int *socket = (int *) data;
-    printf("socket addr %d\n",*socket);
-    char buffer[BUFFER_SIZE];
-    char *resp = NULL;
-
-    // Create client address
-    struct sockaddr_in client_addr;
-    int client_addrlen = sizeof(client_addr);
-
-    // Get client address
-    int sockn = getsockname(*socket, (struct sockaddr *)&client_addr, (socklen_t *)&client_addrlen);
-    if (sockn < 0) {
-        perror("webserver (getsockname)");
-        return NULL;
-    }
-
-    while (1) {
-        // Read from the socket
-        int valread = read(*socket, buffer, BUFFER_SIZE);
-        if (valread < 0) {
-            perror("webserver (read)");
-            continue;
-        }
-
-        // Read the request
-        char method[BUFFER_SIZE], uri[BUFFER_SIZE], version[BUFFER_SIZE];
-        sscanf(buffer, "%s %s %s", method, uri, version);
-        printf("[%s:%u] %s %s %s\n", inet_ntoa(client_addr.sin_addr),
-            ntohs(client_addr.sin_port), method, version, uri);
-
-        parse_web_response(uri);
-
-        resp = read_file("main.html");
-
-        // Write to the socket
-        int valwrite = write(*socket, resp, strlen(resp));
-        if (valwrite < 0) {
-            perror("webserver (write)");
-            continue;
-        }
-
-    }
-
-    free(socket);
-    return NULL;
-}
-
-
 char *read_file(char *name) {
     FILE *fp = fopen(name, "r");
     FILE *header_p = fopen("header", "r");
