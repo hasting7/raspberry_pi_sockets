@@ -3,11 +3,10 @@ build:
 	gcc -Wall -Werror -std=c17 lightController.c server.c -o server -lwiringPi -lpthread -lm
 
 
-client_side:
+push:
 	git add .
 	git commit -am 'update'
 	git push origin main
-	gcc -Wall -Werror -std=c17 client.c -o client
 
 
 website:
