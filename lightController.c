@@ -33,4 +33,5 @@ void setup() {
 
 int main() {
 	setup();
+	set_color(ON);
 }
