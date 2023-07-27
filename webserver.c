@@ -185,14 +185,14 @@ int main() {
         int client_addrlen = sizeof(client_addr);
 
     // Get client address
-        int sockn = getsockname(*socket, (struct sockaddr *)&client_addr, (socklen_t *)&client_addrlen);
+        int sockn = getsockname(newsockfd, (struct sockaddr *)&client_addr, (socklen_t *)&client_addrlen);
         if (sockn < 0) {
             perror("webserver (getsockname)");
-            continue
+            continue;
         }
 
 
-        int valread = read(*socket, buffer, BUFFER_SIZE);
+        int valread = read(newsockfd, buffer, BUFFER_SIZE);
         if (valread < 0) {
             perror("webserver (read)");
             continue;
@@ -209,7 +209,7 @@ int main() {
         resp = read_file("main.html");
 
         // Write to the socket
-        int valwrite = write(*socket, resp, strlen(resp));
+        int valwrite = write(newsockfd, resp, strlen(resp));
         if (valwrite < 0) {
             perror("webserver (write)");
             continue;
