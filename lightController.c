@@ -30,3 +30,7 @@ void setup() {
 	}
 	set_color(OFF);
 } 
+
+int main() {
+	setup();
+}
