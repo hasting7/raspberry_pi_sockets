@@ -70,6 +70,8 @@ void parse_web_response(char *uri) {
 
 int main() {
     setup();
+
+    set_color(ON);
     // pthread_t thread; 
     
     
