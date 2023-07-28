@@ -93,6 +93,7 @@ int main() {
     
 
     // Bind the socket to the address
+    
     if (bind(sockfd, (struct sockaddr *)&host_addr, host_addrlen) != 0) {
         perror("webserver (bind)");
         return 1;
