@@ -61,7 +61,7 @@ void parse_web_response(char *uri) {
 
     if (strncmp(uri,"/?colors=",9) == 0) {
         sscanf(uri, "/?colors=%d", &state);
-        // printf("state: %d\n",state);
+        printf("state: %d\n",state);
     }
 
     set_color(state);
@@ -72,17 +72,15 @@ int main() {
     setup();
 
     set_color(ON);
-    // pthread_t thread; 
-    
-    
+
 
     // Create a socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
-        // perror("webserver (socket)");
+        perror("webserver (socket)");
         return 1;
     }
-    // printf("socket created successfully\n");
+    printf("socket created successfully\n");
 
     // Create the address to bind the socket to
     struct sockaddr_in host_addr;
@@ -99,14 +97,14 @@ int main() {
         // perror("webserver (bind)");
         return 1;
     }
-    // printf("socket successfully bound to address\n");
+    printf("socket successfully bound to address\n");
 
     // Listen for incoming connections
     if (listen(sockfd, SOMAXCONN) != 0) {
-        // perror("webserver (listen)");
+        perror("webserver (listen)");
         return 1;
     }
-    // printf("server listening for connections\n");
+    printf("server listening for connections\n");
 
     char buffer[BUFFER_SIZE];
     char *resp = NULL;
@@ -117,19 +115,17 @@ int main() {
         int newsockfd = accept(sockfd, (struct sockaddr *)&host_addr,
                                (socklen_t *)&host_addrlen);
         if (newsockfd < 0) {
-            // perror("webserver (accept)");
+            perror("webserver (accept)");
             continue;
         }
 
-        // printf("before thread socket: %d\n",newsockfd);
+        printf("before thread socket: %d\n",newsockfd);
 
         int *socket = malloc(sizeof(int *));
 
         memcpy(socket, &newsockfd, sizeof(int));
 
-        // pthread_create(&thread, NULL, thread_func, (void *) socket);
-
-        // printf("new client connected\n");
+        printf("new client connected\n");
 
         // Create client address
         struct sockaddr_in client_addr;
@@ -145,7 +141,7 @@ int main() {
 
         int valread = read(*socket, buffer, BUFFER_SIZE);
         if (valread < 0) {
-            // perror("webserver (read)");
+            perror("webserver (read)");
             continue;
         }
 
@@ -162,7 +158,7 @@ int main() {
         // Write to the socket
         int valwrite = write(*socket, resp, strlen(resp));
         if (valwrite < 0) {
-            // perror("webserver (write)");
+            perror("webserver (write)");
             continue;
         }
 
