@@ -1,7 +1,6 @@
 #!/bin/bash
 
 echo --------Server State--------
-echo 
 cat SERVER_STATE
 echo --------Server Setup--------
 cat setup.out
