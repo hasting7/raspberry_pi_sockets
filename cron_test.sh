@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo HELP MEEEEEEE >> $2
+echo HELP MEEEEEEE >> $1
