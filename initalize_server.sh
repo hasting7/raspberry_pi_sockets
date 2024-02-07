@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [[ $(cat SERVER_STATE | egrep -x '0') ]]; then
-	./web || echo 1 > SERVER_STATE
+	./web > setup.out || echo 1 > SERVER_STATE
 
 else 
-	echo state is 0
+	echo state is 1
 fi
