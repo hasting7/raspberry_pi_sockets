@@ -1,9 +1,10 @@
 #!/bin/bash
 
-echo Server State: 
+echo --------Server State--------
+echo 
 cat SERVER_STATE
-echo Server Setup
+echo --------Server Setup--------
 cat setup.out
-echo Sever Errors
+echo --------Sever Errors--------
 cat error.out
 exit 0
