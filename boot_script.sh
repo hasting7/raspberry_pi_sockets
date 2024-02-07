@@ -2,6 +2,6 @@
 
 ./ready
 
-echo 0 > SERVER_STATE
+echo 0 > $1
 echo "server reset"
 

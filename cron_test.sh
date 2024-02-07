@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo HELP MEEEEEEE >> $1
+echo THIS EXECUTED ON REBOOT >> $1
