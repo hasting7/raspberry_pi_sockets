@@ -1,8 +1,3 @@
-build:
-	git pull origin main
-	gcc -Wall -Werror -std=c17 lightController.c server.c -o server -lwiringPi -lpthread -lm
-
-
 push:
 	git add .
 	git commit -am 'update'
