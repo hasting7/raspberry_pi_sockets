@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # 1 -> path
-$1/ready
+cd $1
 
-echo 0 > $1/SERVER_STATE
-echo "server reset"
+./ready
+
+echo 0 > SERVER_STATE
+echo "server reset" >> setup.out
 

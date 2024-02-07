@@ -2,9 +2,11 @@
 
 # 1 -> path
 
-if [[ $(cat $1/SERVER_STATE | egrep -x '0') ]]; then
-	$1/web > $1/setup.out 2> $1/error.out || echo 1 > $1/SERVER_STATE
+cd $1
+
+if [[ $(cat SERVER_STATE | egrep -x '0') ]]; then
+	./web >> setup.out 2> error.out|| echo 1 > SERVER_STATE
 
 else 
-	echo state is 1
+	echo server already running or error check error.out
 fi
