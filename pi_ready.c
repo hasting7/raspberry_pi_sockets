@@ -4,7 +4,7 @@
 
 #define ON_LIGHT 4
 
-int main() {
+int main(int argc, char **argc) {
 	wiringPiSetup();
 	pinMode(ON_LIGHT, OUTPUT);
 
