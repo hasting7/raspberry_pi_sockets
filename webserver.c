@@ -16,12 +16,12 @@
 
 #define MAX_FILE_SIZE 100000
 
-char *read_file(char *);
+char *read_file(char *, char *);
 void parse_web_response(char *);
 
-char *read_file(char *name) {
+char *read_file(char *name, char *header) {
     FILE *fp = fopen(name, "r");
-    FILE *header_p = fopen("web-src/header", "r");
+    FILE *header_p = fopen(header, "r");
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
     int index = 0;
     char resp;
@@ -68,7 +68,9 @@ void parse_web_response(char *uri) {
 
 }
 
-int main() {
+int main(int argc, char **argv) {
+    // arg 1 -> header
+    // arg 2 -> main.html
     setup();
 
     set_color(ON);
@@ -154,7 +156,7 @@ int main() {
 
         parse_web_response(uri);
 
-        resp = read_file("web-server/main.html");
+        resp = read_file(argv[2], argv[1]);
 
         // Write to the socket
         int valwrite = write(*socket, resp, strlen(resp));

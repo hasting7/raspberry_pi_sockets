@@ -5,7 +5,7 @@ log_dir="server-logs"
 
 cd "$1/$log_dir"
 
-rm -f error.out
+rm -f error.out && touch error.out
 rm -f setup.out 
 rm -f state.out
 
