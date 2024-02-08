@@ -1,4 +1,4 @@
-<h1>Raspberry Pi Sockets</h1>
+<h1>Raspberry Pi Smart Light Controller</h1>
 <h6>By: Ben Hastings</h6>
 <h2>Overview</h2>
 The goal of this project was to create a custom smart light controller to work in my room. I wanted to use what 
