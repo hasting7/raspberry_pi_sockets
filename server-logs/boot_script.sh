@@ -2,6 +2,7 @@
 
 # 1 -> path
 log_dir="server-logs"
+web_dir="web-src"
 
 cd "$1/$log_dir"
 
@@ -16,7 +17,19 @@ cd ".."
 echo 0 > "$log_dir/state.out"
 echo "server reset" >> "$log_dir/setup.out"
 
-cd $log_dir
 
-./initalize_server.sh .. || echo "server set from boot failed " >> error.out
+for file in "state.out" "setup.out"; do
+	if [ ! -e "$log_dir/$file" ]; then
+		echo "$file DNE" >> "$log_dir/error.out" 
+		exit 1
+	fi
+done
+for file in "header" "main.html"; do
+	if [ ! -e "$web_dir/$file" ]; then
+		echo "$file DNE" >> "$log_dir/error.out" 
+		exit 1
+	fi
+done
 
+# ./initalize_server.sh .. || echo "server set from boot failed " >> error.out
+./web "$web_dir/main.html" "$web_dir/header" > "$log_dir/setup.out" 2> "$log_dir/error.out"
