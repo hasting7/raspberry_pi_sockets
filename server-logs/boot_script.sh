@@ -16,3 +16,7 @@ cd ".."
 echo 0 > "$log_dir/state.out"
 echo "server reset" >> "$log_dir/setup.out"
 
+cd $log_dir
+
+./initalize_server.sh ..
+
