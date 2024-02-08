@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
 
         resp = read_file(argv[1], argv[2]);
 
-#ifndef TESTING
+#ifdef TESTING
         printf("%s\n",resp);
 #endif
         // Write to the socket
