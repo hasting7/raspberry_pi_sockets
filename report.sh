@@ -1,7 +1,8 @@
 #!/bin/bash
 
+cd server-logs
 echo --------Server State--------
-cat SERVER_STATE
+cat state.out
 echo --------Server Setup--------
 cat setup.out
 echo --------Sever Errors--------

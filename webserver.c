@@ -21,7 +21,7 @@ void parse_web_response(char *);
 
 char *read_file(char *name) {
     FILE *fp = fopen(name, "r");
-    FILE *header_p = fopen("header", "r");
+    FILE *header_p = fopen("web-src/header", "r");
     char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
     int index = 0;
     char resp;
@@ -154,7 +154,7 @@ int main() {
 
         parse_web_response(uri);
 
-        resp = read_file("main.html");
+        resp = read_file("web-server/main.html");
 
         // Write to the socket
         int valwrite = write(*socket, resp, strlen(resp));
