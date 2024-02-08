@@ -2,6 +2,7 @@
 
 # 1 -> path
 cd "$1/server-logs"
+echo "$1/server-logs"
 
 rm error.out
 rm setup.out
