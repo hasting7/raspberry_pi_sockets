@@ -36,4 +36,4 @@ echo "files validated" >> "$log_dir/setup.out"
 
 # cd "$log_dir"
 # ./initalize_server.sh .. || echo "server set from boot failed " >> error.out
-./web "$web_dir/main.html" "$web_dir/header" > "$log_dir/setup.out" 2> "$log_dir/error.out"
+# ./web "$web_dir/main.html" "$web_dir/header" > "$log_dir/setup.out" 2> "$log_dir/error.out"
