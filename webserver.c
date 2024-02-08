@@ -8,7 +8,12 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+// #define TESTING
+
+#ifndef TESTING
 #include "server.h"
+#endif
+
 
 
 #define PORT 5566
@@ -63,18 +68,19 @@ void parse_web_response(char *uri) {
         sscanf(uri, "/?colors=%d", &state);
         printf("state: %d\n",state);
     }
-
+#ifndef TESTING
     set_color(state);
-
+#endif
 }
 
 int main(int argc, char **argv) {
-    // arg 1 -> header
-    // arg 2 -> main.html
+    // arg 1 -> main.html
+    // arg 2 -> header
+#ifndef TESTING
     setup();
 
     set_color(ON);
-
+#endif
 
     // Create a socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -156,7 +162,9 @@ int main(int argc, char **argv) {
 
         parse_web_response(uri);
 
-        resp = read_file(argv[2], argv[1]);
+        resp = read_file(argv[1], argv[2]);
+
+        printf("%s\n",resp);
 
         // Write to the socket
         int valwrite = write(*socket, resp, strlen(resp));
@@ -165,7 +173,8 @@ int main(int argc, char **argv) {
             continue;
         }
 
-        
+        free(resp);
+        resp = NULL;        
         close(newsockfd);
     }
 
