@@ -22,13 +22,13 @@ done
 
 
 if [[ $(cat "$log_dir/state.out" | egrep -x '0') ]]; then
-	./web "$web_dir/main.html" "$web_dir/header" >> "$log_dir/setup.out" 2>> "$log_dir/error.out"
+	./web "$web_dir/main.html" "$web_dir/header" >> "$log_dir/setup.out" 2>> "$log_dir/error.out" || exit 1
 	if [ ! -z $? ]; then
 		echo 1 > "$log_dir/state.out"
 	fi
 
 else 
-	echo server already running or error check error.out >> "$log_dir/setup.out"
+	echo server already running >> "$log_dir/setup.out"
 fi
 
 exit 0

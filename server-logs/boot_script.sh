@@ -18,5 +18,5 @@ echo "server reset" >> "$log_dir/setup.out"
 
 cd $log_dir
 
-./initalize_server.sh ..
+./initalize_server.sh .. || echo "server set from boot failed " >> error.out
 
