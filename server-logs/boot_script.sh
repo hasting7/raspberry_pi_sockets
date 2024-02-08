@@ -3,10 +3,13 @@
 # 1 -> path
 log_dir="server-logs"
 
+cd "$1/$log_dir"
 
 rm error.out
-rm setup.out
+rm setup.out 
 rm state.out
+
+cd $1
 
 ./ready
 
