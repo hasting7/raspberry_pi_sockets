@@ -4,14 +4,12 @@
 log_dir="server-logs"
 
 cd "$1/$log_dir"
-pwd
 
-rm error.out
-rm setup.out 
-rm state.out
+rm -f error.out
+rm -f setup.out 
+rm -f state.out
 
 cd ".."
-pwd
 
 ./ready
 
