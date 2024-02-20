@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-#define TESTING
+// #define TESTING
 
 #ifndef TESTING
 #include "server.h"
