@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-// #define TESTING
+#define TESTING
 
 #ifndef TESTING
 #include "server.h"
@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
 
         resp = read_file(argv[1], argv[2]);
 
-#ifdef TESTING
+#if defined TESTING && defined SHOW
         printf("%s\n",resp);
 #endif
         // Write to the socket
