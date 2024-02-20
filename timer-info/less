@@ -1,0 +1,115 @@
+Content-type: text/html
+
+<html>
+<style>
+h1 {
+	color: white;
+	font-family: Verdana;
+	text-align: center;
+	width: 100%;
+	font-size: 48px;
+}
+html {
+	background-color: black;
+}
+#toggle {
+	display: flex;
+}
+
+#colors {
+	display: flex;
+	width: 100%;
+	height: inherit;
+}
+
+#colors button {
+	flex: auto;
+	width: 30%;
+	height: 400px;
+	margin: 0.3%;
+	border-radius: 10px;
+}
+
+#toggle button {
+	flex: 1;
+	width: 50%;
+	height: 100px;
+	margin: 0.5%;
+	font-family: Verdana;
+	font-size: 300%;
+	background-color: white;
+	border-radius: 10px;
+}
+
+#red {
+	background-color: #bf001a;
+}
+#blue {
+	background-color: #0a00bf;
+}
+#green {
+	background-color: #00b324;
+}
+#yellow {
+	background-color: #c0ff03;
+}
+#cyan {
+	background-color: #02bfcc;
+}
+#purple {
+	background-color: #b217ff;
+}
+#duration {
+	font-family: Verdana;
+	font-size: 600%;
+	width: 35%;
+	height: 25%;
+	text-align: center;
+}
+#container {
+	width: 35%;
+	height: 15%;
+	display: flex;
+}
+.options {
+	flex: 1;
+
+}
+</style>
+<div>
+	<h1>
+		Closet Light Controller
+	</h1>
+</div>
+<div>
+	<form method="get" id="toggle">
+		<button name="colors" value="7" id="on">ON</button>
+		<button name="colors" value="0" id="off">OFF</button>
+		<br/>	
+	</form>
+	<form method="get" id="colors">
+		<button name="colors" value="4" id="red"></button>
+		<button name="colors" value="1" id="blue"></button>
+		<button name="colors" value="2" id="green"></button>
+	</form>
+	<form method="get" id="colors">
+		<button name="colors" value="6" id="yellow"></button>
+		<button name="colors" value="3" id="cyan"></button>
+		<button name="colors" value="5" id="purple"></button>
+	</form>
+</div>
+<div>
+	<h1>
+		Set A Timer
+	</h1>
+	<form method="get" id="timer">
+		<center><input type="number" id="duration" name="timer" value="10"></input></center>
+		<br/>
+		<center><div id="container">
+			<button name="set" class="options">SET</button>
+			<button name="clear" class="options">CLEAR</button>
+		</div></center>
+	</form>
+</div>
+
+</html>
