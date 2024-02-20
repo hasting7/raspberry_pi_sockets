@@ -66,7 +66,7 @@ void parse_web_response(char *uri) {
 
     if (strncmp(uri,"/?colors=",9) == 0) {
         sscanf(uri, "/?colors=%d", &state);
-        printf("state: %d\n",state);
+        fprintf(stderr,"state: %d\n",state);
     }
 #ifndef TESTING
     set_color(state);
@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
         perror("webserver (socket)");
         return 1;
     }
-    printf("socket created successfully\n");
+    fprintf(stderr,"socket created successfully\n");
 
     // Create the address to bind the socket to
     struct sockaddr_in host_addr;
@@ -106,14 +106,14 @@ int main(int argc, char **argv) {
         perror("webserver (bind)");
         return 1;
     }
-    printf("socket successfully bound to address\n");
+    fprintf(stderr,"socket successfully bound to address\n");
 
     // Listen for incoming connections
     if (listen(sockfd, SOMAXCONN) != 0) {
         perror("webserver (listen)");
         return 1;
     }
-    printf("server listening for connections\n");
+    fprintf(stderr,"server listening for connections\n");
 
     char buffer[BUFFER_SIZE];
     char *resp = NULL;
@@ -128,13 +128,13 @@ int main(int argc, char **argv) {
             continue;
         }
 
-        printf("before thread socket: %d\n",newsockfd);
+        fprintf(stderr,"before thread socket: %d\n",newsockfd);
 
         int *socket = malloc(sizeof(int *));
 
         memcpy(socket, &newsockfd, sizeof(int));
 
-        printf("new client connected\n");
+        fprintf(stderr,"new client connected\n");
 
         // Create client address
         struct sockaddr_in client_addr;
@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
         // Read the request
         char method[BUFFER_SIZE], uri[BUFFER_SIZE], version[BUFFER_SIZE];
         sscanf(buffer, "%s %s %s", method, uri, version);
-        printf("[%s:%u] %s %s %s\n", inet_ntoa(client_addr.sin_addr),
+        fprintf(stderr,"[%s:%u] %s %s %s\n", inet_ntoa(client_addr.sin_addr),
             ntohs(client_addr.sin_port), method, version, uri);
 
         parse_web_response(uri);
