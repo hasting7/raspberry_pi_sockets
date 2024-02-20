@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+
+import os, sys
+
+PI_IP = "198.162.1.105:5566"
+
+toggle_lights = "curl %s/?color=%d"%PI_IP;
+
+os.system(toggle_lights%3);	
