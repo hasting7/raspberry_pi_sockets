@@ -136,7 +136,7 @@ void *thread_func(void *data) {
 
     free(buffer);
     close(socket);
-    pthread_exit(thread);
+    pthread_exit((void *) &thread);
     free(info);
     return NULL;
 }
@@ -146,7 +146,7 @@ int main(int argc, char **argv) {
   
     struct sockaddr_in dest; /* socket info about the machine connecting to us */
     struct sockaddr_in serv; /* socket info about our server */
-    pthread_t thread = NULL;
+    pthread_t thread = -1;
     socklen_t socksize = sizeof(struct sockaddr_in);
 
     memset(&serv, 0, sizeof(serv));           /* zero the struct before filling the fields */
