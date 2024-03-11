@@ -1,9 +1,33 @@
 #!/usr/bin/python3
 
-import os, sys
+import os, sys;
 
-PI_IP = "198.162.1.105:5566"
+PATH = sys.argv[1];
 
-toggle_lights = "curl %s/?color=%d"%PI_IP;
+PI_IP = "192.168.1.105:5566";
+TIMER_FILE = "%s/timer.info"%PATH;
 
-os.system(toggle_lights%3);	
+toggle_lights_command = "curl %s/\?colors=%d";
+
+def toggle_lights(color):
+	os.system(toggle_lights_command%(PI_IP,color));	
+
+def update_timer(filename):
+	value = None;
+	with open(filename, 'r') as file:
+		value = file.read();
+	if (value.strip() == ''):
+		print("no timer")
+		return 1
+	value = int(value);
+
+	if (value <= 1):
+		toggle_lights(0);
+		open(filename,'w').close();
+	else:
+		with open(filename, 'w') as file:
+			file.write("%d"%(value - 1));
+
+	return 0;
+
+update_timer(TIMER_FILE);

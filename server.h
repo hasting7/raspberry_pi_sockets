@@ -14,7 +14,6 @@
 #define CYAN 3
 
 
-
 void setupSegPins();
 void displayValue(int);
 void *thread_func(void *);
