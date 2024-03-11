@@ -81,11 +81,12 @@ char *generate_html_resp(char *header, char *html_file, int *length) {
 }
 
 void parse_web_response(char *uri, char *timer_filename) {
+    fprintf(stderr, "URI: %s\n", uri);
     static int state = 0;
     char time[MAX_TIME_CHAR] = { 0 };
     if (strncmp(uri,"/?", 2) != 0) return; 
 
-    if (strncmp(uri, "/?timer=", 8) == 0) {
+    else if (strncmp(uri, "/?timer=", 8) == 0) {
         for (; *uri != '='; uri++) {};
         uri++;
         for (int i = 0; *uri != '&'; uri++) {
@@ -105,7 +106,7 @@ void parse_web_response(char *uri, char *timer_filename) {
         return;
     }
 
-    if (strncmp(uri,"/?colors=",9) == 0) {
+    else if (strncmp(uri,"/?colors=",9) == 0) {
         sscanf(uri, "/?colors=%d", &state);
         fprintf(stderr,"state: %d\n",state);
 #ifndef TESTING
