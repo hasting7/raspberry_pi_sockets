@@ -18,8 +18,8 @@ struct thread_info {
 int main_socket;
 char *main_page_path;
 
-#define TESTING
-#define SHOW
+//#define TESTING
+//#define SHOW
 
 #ifndef TESTING
 #include "server.h"
