@@ -1,9 +1,9 @@
 push:
 	git add .
 	git commit -am 'update'
-	git checkout -b update
-	git push origin update
-	git branch -d update
+# 	git checkout -b update
+# 	git push origin update
+# 	git branch -d update
 
 
 website:
