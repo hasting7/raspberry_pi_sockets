@@ -1,52 +1,65 @@
 // webserver.c
-#include <arpa/inet.h>
-#include <errno.h>
 #include <stdio.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
 #include <pthread.h>
 
-// #define TESTING
+char *ok_header = "HTTP/1.0 200 OK\n\rServer: webserver-c\n\rContent-Type: text/html; charset=UTF-8\n\rContent-Length: %d\n\rAccept-Ranges: bytes\r\nConnection: close\r\n\n\r";
+
+struct thread_info {
+    int socket;
+    pthread_t thread;
+};
+int main_socket;
+char *main_page_path;
+
+#define TESTING
+#define SHOW
 
 #ifndef TESTING
 #include "server.h"
 #endif
 
 
-
 #define PORT 5566
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 2028
+#define MAX_TIME_CHAR 3
 
-#define MAX_FILE_SIZE 100000
+#define MAX_WRITE_SIZE 1000000
 
 char *read_file(char *, char *);
-void parse_web_response(char *);
+void parse_web_response(char *, char *);
+char *generate_html_resp(char *, char *, int *);
 
-char *read_file(char *name, char *header) {
-    FILE *fp = fopen(name, "r");
-    FILE *header_p = fopen(header, "r");
-    char *file_content = calloc(MAX_FILE_SIZE, sizeof(char));
+
+int get_file_length(char *filename) {
+    FILE *fp = fopen(filename,"r");
+    if (fp == NULL) {
+        fprintf(stderr,"file reading error\n");
+        exit(1);
+    }
+    fseek(fp, 0, SEEK_END);
+    int length = ftell(fp);
+    fclose(fp);
+    fp = NULL;
+    return length;
+}
+
+char *generate_html_resp(char *header, char *html_file, int *length) {
+    int file_length = get_file_length(html_file);
+    char complete_header[BUFFER_SIZE];
+    char *final_message = calloc(MAX_WRITE_SIZE, sizeof(char));
+    char *file_content = calloc(file_length + 1, sizeof(char));
+
+    FILE *fp = fopen(html_file,"r");
+
     int index = 0;
-    char resp;
-
-    while(!feof(header_p)) {
-        resp = fgetc(header_p);
-        if (feof(header_p)) break;
-        file_content[index] = resp;
-        if (resp == '\n') {
-            index++;
-            file_content[index] = '\r';
-        }
-        index++;
-    }
-    for (int i = 0; i < 2; i++) {
-        file_content[index] = '\n';
-        file_content[index + 1] = '\r';
-        index += 2;
-    }
-
+    int resp = 0;
     while (!feof(fp)) {
         resp = fgetc(fp);
         if (feof(fp)) break;
@@ -54,130 +67,125 @@ char *read_file(char *name, char *header) {
         index++;
     }
 
-    fclose(fp);
-    fclose(header_p);
+    sprintf(complete_header, header, file_length);
+    strcat(final_message, complete_header);
+    strcat(final_message, file_content);
 
-    return file_content;
+    *length = strlen(final_message) + 1;
+    final_message[*length - 1] = '\0';
+
+    free(file_content);
+    fclose(fp);
+    fp = NULL;
+    return final_message;
 }
 
-void parse_web_response(char *uri) {
+void parse_web_response(char *uri, char *timer_filename) {
     static int state = 0;
+    char time[MAX_TIME_CHAR] = { 0 };
     if (strncmp(uri,"/?", 2) != 0) return; 
+
+    if (strncmp(uri, "/?timer=", 8) == 0) {
+        for (; *uri != '='; uri++) {};
+        uri++;
+        for (int i = 0; *uri != '&'; uri++) {
+            time[i++] = *uri;
+            if (i > MAX_TIME_CHAR) {
+                fprintf(stderr, "TIMER TOO LONG: %d\n", i);
+                return;
+            }
+        };
+        uri++;
+        printf("%s %s\n",uri,time);
+        FILE *timer_fp = fopen(timer_filename, "w");
+        if (strcmp(uri,"set=") == 0) {
+            fprintf(timer_fp, "timer: %d\n",atoi(time));
+        }
+        fclose(timer_fp);
+        return;
+    }
 
     if (strncmp(uri,"/?colors=",9) == 0) {
         sscanf(uri, "/?colors=%d", &state);
         fprintf(stderr,"state: %d\n",state);
-    }
 #ifndef TESTING
-    set_color(state);
+        set_color(state);
 #endif
+        return;
+    }
+
+}
+
+void *thread_func(void *data) {
+    struct thread_info *info = (struct thread_info *) data;
+    pthread_t thread = info->thread;
+    int socket = info->socket;
+
+    char temp[BUFFER_SIZE];
+    char method[BUFFER_SIZE], uri[BUFFER_SIZE], version[BUFFER_SIZE];
+    int items = read(socket, temp, BUFFER_SIZE);
+        
+    sscanf(temp, "%s %s %s", method, uri, version);
+    parse_web_response(uri, "./timer.info");
+    fprintf(stderr,"client: %d):%s %s %s\n", socket, method, version, uri);
+
+    int length = 0;
+    char *buffer = generate_html_resp(ok_header, main_page_path, &length);
+
+    send(socket, buffer, length, 0);
+
+    free(buffer);
+    close(socket);
+    pthread_exit(thread);
+    free(info);
+    return NULL;
 }
 
 int main(int argc, char **argv) {
-    // arg 1 -> main.html
-    // arg 2 -> header
-#ifndef TESTING
-    setup();
+    main_page_path = argv[1];
+  
+    struct sockaddr_in dest; /* socket info about the machine connecting to us */
+    struct sockaddr_in serv; /* socket info about our server */
+    pthread_t thread = NULL;
+    socklen_t socksize = sizeof(struct sockaddr_in);
 
-    set_color(ON);
-#endif
+    memset(&serv, 0, sizeof(serv));           /* zero the struct before filling the fields */
+    serv.sin_family = AF_INET;                /* set the type of connection to TCP/IP */
+    serv.sin_addr.s_addr = htonl(INADDR_ANY); /* set our address to any interface */
+    serv.sin_port = htons(PORT);           /* set the server port number */    
 
-    // Create a socket
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd == -1) {
-        perror("webserver (socket)");
+    main_socket = socket(AF_INET, SOCK_STREAM, 0);
+    if (main_socket == -1) {
+        fprintf(stderr,"webserver (socket)\n");
         return 1;
     }
-    fprintf(stderr,"socket created successfully\n");
-
-    // Create the address to bind the socket to
-    struct sockaddr_in host_addr;
-    int host_addrlen = sizeof(host_addr);
-
-    host_addr.sin_family = AF_INET;
-    host_addr.sin_port = htons(PORT);
-    host_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-
-    
-
-    // Bind the socket to the address
-    
-    if (bind(sockfd, (struct sockaddr *)&host_addr, host_addrlen) != 0) {
-        perror("webserver (bind)");
+  
+    /* bind serv information to mysocket */
+    int bind_resp = bind(main_socket, (struct sockaddr *)&serv, sizeof(struct sockaddr));
+    if (bind_resp != 0) {
+        fprintf(stderr,"webserver (bind)\n");
+        close(main_socket);
         return 1;
     }
-    fprintf(stderr,"socket successfully bound to address\n");
-
-    // Listen for incoming connections
-    if (listen(sockfd, SOMAXCONN) != 0) {
-        perror("webserver (listen)");
-        return 1;
-    }
-    fprintf(stderr,"server listening for connections\n");
-
-    char buffer[BUFFER_SIZE];
-    char *resp = NULL;
 
 
-    for (;;) {
-        // Accept incoming connections
-        int newsockfd = accept(sockfd, (struct sockaddr *)&host_addr,
-                               (socklen_t *)&host_addrlen);
-        if (newsockfd < 0) {
-            perror("webserver (accept)");
-            continue;
-        }
+    /* start listening, allowing a queue of up to 1 pending connection */
 
-        fprintf(stderr,"before thread socket: %d\n",newsockfd);
+    while (1) {
+        listen(main_socket, 1);
+        int consocket = accept(main_socket, (struct sockaddr *)&dest, &socksize);
 
-        int *socket = malloc(sizeof(int *));
-
-        memcpy(socket, &newsockfd, sizeof(int));
-
-        fprintf(stderr,"new client connected\n");
-
-        // Create client address
-        struct sockaddr_in client_addr;
-        int client_addrlen = sizeof(client_addr);
-
-    // Get client address
-        int sockn = getsockname(*socket, (struct sockaddr *)&client_addr, (socklen_t *)&client_addrlen);
-        if (sockn < 0) {
-            // perror("webserver (getsockname)");
-            continue;
-        }
+        // *sock = consocket;
+        // *thread_id = thread;
+        struct thread_info *info = malloc(sizeof(struct thread_info));
+        info->socket = consocket;
+        info->thread = thread;
 
 
-        int valread = read(*socket, buffer, BUFFER_SIZE);
-        if (valread < 0) {
-            perror("webserver (read)");
-            continue;
-        }
+        pthread_create(&thread, NULL, thread_func, (void *) info);
 
-        // Read the request
-        char method[BUFFER_SIZE], uri[BUFFER_SIZE], version[BUFFER_SIZE];
-        sscanf(buffer, "%s %s %s", method, uri, version);
-        fprintf(stderr,"[%s:%u] %s %s %s\n", inet_ntoa(client_addr.sin_addr),
-            ntohs(client_addr.sin_port), method, version, uri);
-
-        parse_web_response(uri);
-
-        resp = read_file(argv[1], argv[2]);
-
-#if defined TESTING && defined SHOW
-        printf("%s\n",resp);
-#endif
-        // Write to the socket
-        int valwrite = write(*socket, resp, strlen(resp));
-        if (valwrite < 0) {
-            perror("webserver (write)");
-            continue;
-        }
-
-        free(resp);
-        resp = NULL;        
-        close(newsockfd);
     }
 
+    close(main_socket);
     return 0;
 }
