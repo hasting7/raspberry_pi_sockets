@@ -5,7 +5,6 @@ push:
 # 	git push origin update
 # 	git branch -d update
 
-
 website:
 	git pull origin main
 	gcc -Wall -Werror -std=c17 -o ready pi_ready.c -lwiringPi -lpthread -lm
