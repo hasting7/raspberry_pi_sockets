@@ -118,6 +118,8 @@ void parse_web_response(char *uri, char *timer_filename) {
 }
 
 void *thread_func(void *data) {
+    setup();
+    
     struct thread_info *info = (struct thread_info *) data;
     pthread_t thread = info->thread;
     int socket = info->socket;
