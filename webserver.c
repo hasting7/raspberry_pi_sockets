@@ -36,6 +36,8 @@ char *read_file(char *, char *);
 void parse_web_response(char *, char *);
 char *generate_html_resp(char *, char *, int *);
 
+volatile int state = 0;
+
 
 int get_file_length(char *filename) {
     FILE *fp = fopen(filename,"r");
@@ -82,7 +84,6 @@ char *generate_html_resp(char *header, char *html_file, int *length) {
 
 void parse_web_response(char *uri, char *timer_filename) {
     fprintf(stderr, "URI: %s\n", uri);
-    static volatile int state = 0;
     char time[MAX_TIME_CHAR] = { 0 };
     if (strncmp(uri,"/?", 2) != 0) return; 
 
