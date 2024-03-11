@@ -82,7 +82,7 @@ char *generate_html_resp(char *header, char *html_file, int *length) {
 
 void parse_web_response(char *uri, char *timer_filename) {
     fprintf(stderr, "URI: %s\n", uri);
-    static int state = 0;
+    static volatile int state = 0;
     char time[MAX_TIME_CHAR] = { 0 };
     if (strncmp(uri,"/?", 2) != 0) return; 
 
@@ -119,7 +119,7 @@ void parse_web_response(char *uri, char *timer_filename) {
 
 void *thread_func(void *data) {
     setup();
-    
+
     struct thread_info *info = (struct thread_info *) data;
     pthread_t thread = info->thread;
     int socket = info->socket;
