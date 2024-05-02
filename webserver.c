@@ -26,7 +26,7 @@ char *main_page_path;
 #endif
 
 
-#define PORT 5566
+#define PORT 4000
 #define BUFFER_SIZE 2028
 #define MAX_TIME_CHAR 3
 
